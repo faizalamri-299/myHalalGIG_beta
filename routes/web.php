@@ -189,7 +189,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         /////////////////////////////////////////////////////////////For Product Details//////////////////////////////////////////
     
     Route::get('/getproductdetailsHFP',"ProductController@getProductDetailsHFP"); //get for halal file print
-
     /////////////////////////////////////////////////Halal File (Lab Analysis)////////////////////////////////////////////////////////////////
     // Route::get('/getlabanalysis', "LabAnalysisController@index");
     // Route::post('/postlabanalysis',"LabAnalysisController@create");

@@ -4,7 +4,7 @@ import {sessionRedirect} from '../../components/function';
 
 export const HASFileContext = React.createContext();
 
-
+//entahlah saya rasa macam tak gune pun ni. sebab hmmm takde crud data just download je. betul kan ? entahlah nurul. ye betul tapi Hasfilecontext tu masih gune. 
 export const getHASFile = () => {
   return new Promise( (resolve, reject)=> {
     axios.get('/gethasfile').then(({ data }) => resolve(data))

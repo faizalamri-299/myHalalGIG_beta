@@ -39,6 +39,7 @@ import FlashScreen from '../screens/FlashScreen';
 import SupplierNavigator from './SupplierNavigator';
 import ProductNavigator from './ProductNavigator';
 import HalalFileNavigator from './HalalNavigator';
+import HASFileNavigator from './HASNavigator';
 import UploadHASNavigator from './UploadHASNavigator';
 import ClientSelectedNavigator from './ClientSelectedNavigator';
 import swal from '@sweetalert/with-react'
@@ -334,12 +335,14 @@ const updateCklist =(x)=>{
           to="/HASFile"
           active={activeItem === 'HASFile'}
         /> */}
+  
         <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('HalalFile'))}
           icon= 'file archive'
           name='Templat Fail HAS'
           to="/HalalFile"
           active={activeItem === 'HalalFile'}
         />
+      
        <Menu.Item onClick={()=>sidebarClick(signOut())} attached="bottom"
          name='Log Keluar'
        />
@@ -408,6 +411,12 @@ const updateCklist =(x)=>{
           to="/HASFile"
           active={activeItem === 'HASFile'}
         /> */}
+        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('HASFile'))}
+          icon= 'file archive'
+          name='Templat Fail HALAL'
+          to="/HASFile"
+          active={activeItem === 'HASFile'}
+        />
         <Menu.Item as={Link} onClick={()=>setactiveItem('HalalFile')}
           icon= 'file archive'
           name='Templat Fail HAS'
@@ -461,6 +470,9 @@ const updateCklist =(x)=>{
                     </Route>
                     <Route path="/product">
                         <ProductNavigator />
+                    </Route>
+                    <Route path="/HASFile">
+                        <HASFileNavigator />
                     </Route>
                     <Route path="/HalalFile">
                         <HalalFileNavigator />
