@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Slabo+27px&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Condensed:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Explora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap');
+
+body #Qwitcher {
+    font-family: 'Bilbo Swash Caps', cursive;
+    }
+
+body #Cabin {
+    font-family: 'Cabin Condensed', sans-serif;
+    
+    }
+
+body #Barcode {
+    font-family: 'Major Mono Display', monospace;
+    
+    }
+
+.flexcenter{
+    display: flex;
+    height: 100vh;
+    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.innerContainer{
+    
+    display: flex;
+    flex:1;
+  
+}
+.listScroll{
+    height: 75vh;
+    overflow-y: auto;
+
+}
+.header + .listScroll{
+    height: 95%;
+
+}
+.subcrTabPane{
+    height: 40vh;
+    overflow-y: auto;
+}
+.clientTable{
+    height: 60vh;
+    overflow-y: auto;
+    padding-bottom: 5vh;
+}
+.clientUserTable{
+    height: 75vh;
+    overflow-y: auto;
+    padding-bottom: 5vh;
+}
+.flexCol{
+    flex-direction: column !important;
+}
+.draggable {
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+  }
+  .fullwidth{
+      width:100%;
+  }
+
+
+.listadvisorpadding {
+width: 500px;
+display: flex; 
+padding-bottom: 50px;
+padding-right: 100px;
+align-items: center;
+/* border:double; */
+}
+
+.padding {
+    display: block;
+    padding: 10px 30px;
+}
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    height: 90vh;
+    /* width: 160vh; */
+    overflow-y: auto;
+}
+
+.row-warning {
+    background-color: rgba(255, 255, 0, 0.45);
+}
+
+.row-error {
+    background-color: rgba(255, 0, 0, 0.85);
+}
+
+.flexAlign {
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: space-between; /* switched from default (flex-start, see below) */
+}
+
+.center-justified {
+    text-align: justify;
+    text-align-last: center;
+}
+
+.scrollable{
+    height: 100%;
+overflow: scroll;
+}
