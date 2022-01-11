@@ -67,12 +67,22 @@ export const regCmpny=(data)=>{
 
 export const regCmpnySU=(data)=>{ 
   return new Promise( (resolve, reject)=> {
-    axios.post('/registercompanysu',data).then(({ data }) => resolve(data))
-    .catch( (error)=> {
-      reject(error.response.data);
+    axios.post('/registercompanysu',data).then((data) => {
+      swal("Berjaya!", "Maklumat telah berjaya dikemaskini!", "success").then((result) => {
+        console.log(result);
+        if(result) {
+          location.reload(); //if click button ok, apa dia buat
+        } else {
+          location.reload();
+        }
+      }); //contoh untuk display error and success message
+        ({ data }) => resolve(data);
+    })
+    .catch((error)=> {
+      console.log("ajax error");
+        swal("Error", "Something goes wrong!", "error");
     });
   });
-  
 }
 
 export const checkSession = () => {
