@@ -71,7 +71,7 @@ const ProfileList = () => {
   <Table.Cell>{x.username}</Table.Cell>
   <Table.Cell>{x.cmpnyName}</Table.Cell>
   <Table.Cell>{x.rolename}</Table.Cell>
-  <Table.Cell>{x.lastLogin}</Table.Cell>
+  {/* <Table.Cell>{x.lastLogin}</Table.Cell> */}
   
   <Table.Cell>
     </Table.Cell>
@@ -83,11 +83,11 @@ const ProfileList = () => {
     <Table.Row>
       <Table.HeaderCell>No</Table.HeaderCell>
       <Table.HeaderCell></Table.HeaderCell>
-      <Table.HeaderCell>Name</Table.HeaderCell>
-      <Table.HeaderCell>Login ID</Table.HeaderCell>
-      <Table.HeaderCell>Company</Table.HeaderCell>
-      <Table.HeaderCell>System Role</Table.HeaderCell>
-      <Table.HeaderCell>Last Login</Table.HeaderCell>
+      <Table.HeaderCell>Nama</Table.HeaderCell>
+      <Table.HeaderCell>Emel</Table.HeaderCell>
+      <Table.HeaderCell>Premis</Table.HeaderCell>
+      <Table.HeaderCell>Role</Table.HeaderCell>
+      {/* <Table.HeaderCell>Last Login</Table.HeaderCell> */}
     </Table.Row>
   </Table.Header>
 
@@ -178,34 +178,34 @@ const ProfileList = () => {
                 placeholder='Search users...'
               />
     </Header>
-    <Header as='h3' floated='left'>Profile List</Header>
+    <Header as='h3' floated='left'>Senarai Pengguna</Header>
        
-        <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Add</Button>
+        <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Tambah Pengguna</Button>
       <Divider/>
       <div style={{height:'70vh', overflowY:'auto'}}>
       {(userFilter && userFilter.length)&&<RenderProfile data={userFilter}/>}
   <Modal style={{position:'relative',height:'auto'}}
               onClose={() =>{ setModalOpen(false),resetForm()}}
               open={modalOpen}>
-            <Header icon='archive' content='User Management' />
+            <Header icon='user' content='Tambah Pengguna' />
             <Modal.Content>
             <Form>
             <Form.Group widths='equal'>
             <Form.Input
               fluid
-              label='Name'
+              label='Nama'
               onChange={e=>setname(e.target.value)}
               value={name}
             />
             <Form.Input
               fluid
-              label='Login ID'
+              label='Emel'
               onChange={e=>setusername(e.target.value)}
               value={username}
             />
           </Form.Group>
           <Form.Dropdown
-            placeholder='Company'
+            placeholder='Premis'
             fluid
             search
             selection
@@ -225,14 +225,14 @@ const ProfileList = () => {
               <Form.Group widths='equal'>
             <Form.Input
               fluid
-              label='Password'
+              label='Katalaluan'
               type="password"
               onChange={e=>setpassword(e.target.value)}
               value={password}
             />
             <Form.Input
               fluid
-              label='Reconfirm Password'
+              label='Sahkan Katalaluan'
               type="password"
               onChange={e=>setpassword2(e.target.value)}
               value={password2}
@@ -242,10 +242,10 @@ const ProfileList = () => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Hantar
               </Button>
             </Modal.Actions>
           </Modal>

@@ -82,9 +82,9 @@ class companyController extends Controller
             'halal_batchmanufacturing.filename AS batch_filename','halal_certificatejpv.filename AS jpv_filename','halal_employeehealthrecords.filename AS emphealth_filename','halal_foodhandler.filename AS foodhandler_filename','halal_halaltracking.filename AS tracking_filename','halal_manufacturerlicense.filename AS manu_filename','halal_msdocuments.filename AS ms_filename','halal_notnobfk.filename AS bfk_filename','halal_operationsflow.filename AS flow_filename','halal_productmanufacturing.filename AS productmanu_filename','halal_productregistration.filename AS productreg_filename','halal_serturecords.filename AS sertu_filename','halal_slaughterercredentials.filename AS slaughter_filename','halal_slaughterrecords.filename AS slaughterrec_filename','halal_warehousinglicense.filename AS warehouse_filename',
             'tbl_hi_halal_invois.hi_filename','tbl_hjh_halal_jaminan_halal.hjh_filename','tbl_hlp_halal_lesen_perniagaan.hlp_filename','tbl_hmp_halal_maklumat_pekerja.hmp_filename','tbl_hpc_halal_pest_control.hpc_filename','tbl_hpi_halal_permit_import.hpi_filename','tbl_hpk_halal_penyata_kewangan.hpk_filename','tbl_hpl_halal_permohonan_lengkap.hpl_filename','tbl_hpl_halal_peta_lokasi.hpl_filename AS hplk_filename','tbl_hpp_halal_pengeluaran_produk.hpp_filename','tbl_hp_halal_pembungkusan.hp_filename','tbl_hsa_halal_susun_atur.hsa_filename','tbl_hsh_halal_sijil_halal.hsh_filename','tbl_hsk_halal_surat_kkm.hsk_filename','tbl_hsl_halal_surat_lantikan.hsl_filename','tbl_hsp_halal_sijil_pendaftaran.hsp_filename','tbl_hst_halal_suntikan_thypoid.hst_filename','users.created_at','users.username')
             ->groupBy('companies.cmpnyName')
-            ->where([
-                ['users.created_at', '>', '2021-10-24'],
-            ])
+            // ->where([
+            //     ['users.created_at', '>', '2021-10-24'],
+            // ])
             ->get();
 
         foreach ($cmpny as $c) {
@@ -323,6 +323,27 @@ class companyController extends Controller
         $user->save();
 
         return response()->json(['isSuccess' =>true,'session'=>$request->session()->all(),'user' =>$user,'cmpny'=>Auth::user()->getCompany(),'accesslevel'=>Auth::user()->getRoleLevel()]);
+      }
+
+      function registerCompanySU(Request $request){    
+        
+        $cmpny_status=company::where('cmpnyName',$request->cmpnyName)->first();
+
+        if(!is_null($cmpny_status)) {
+            return response()->json(['isSuccess' =>false,'message'=>"Nama syarikat '".$request->cmpnyName."' telah berdaftar didalam sistem"],417);
+        }
+
+        $cmpny= new company;
+        $cmpny->cmpnyName=$request->cmpnyName;
+        $cmpny->cmpnyDetails=json_encode($request->cmpnyDetails);
+        $cmpny->save();
+        $cmpny->cmpnyDetails=$request->cmpnyDetails;
+      
+        // $user = Auth::user();
+        // $user->cmpnyFK = $cmpny->cmpnyPK;
+        // $user->save();
+
+        return response()->json(['isSuccess' =>true,'session'=>$request->session()->all(),'cmpny'=>Auth::user()->getCompany(),'accesslevel'=>Auth::user()->getRoleLevel()]);
       }
 
       function addPremise(Request $request){

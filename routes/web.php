@@ -93,6 +93,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Route::post('/registercompany',"companyController@registerCompany");
+    Route::post('/registercompanysu',"companyController@registerCompanySU");
+
 
     // Route::post('/postpremise',"companyController@addPremise");
     // Route::post('/postihc',"companyController@addIHC");

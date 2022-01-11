@@ -102,7 +102,7 @@ const HomeNavigator = () => {
         <Menu.Item header>Maklumat</Menu.Item>
         <Menu.Item as={Link} onClick={()=>setactiveItem('company')}
           icon= 'building outline'
-          name='Syarikat'
+          name='Premis'
           to="/company"
           active={activeItem === 'company'}
         />
@@ -131,17 +131,17 @@ const HomeNavigator = () => {
           to="/supplier"
           active={activeItem === 'supplier'}
         />
-        <Menu.Item as={Link} onClick={()=>setactiveItem('advisor')}
+        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('advisor')}
           icon= 'address card outline'
           name='Advisors'
           to="/advisor"
           active={activeItem === 'advisor'}
-        />
-        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('user')}
-          name='Users'
+        /> */}
+        <Menu.Item as={Link} onClick={()=>setactiveItem('user')}
+          name='Senarai Pengguna'
           to="/profile"
           active={activeItem === 'user'}
-        /> */}
+        />
         {/* <Menu.Item as={Link} onClick={()=>setactiveItem('product')}
           icon= 'food'
           name='Produk 𝘭 Menu'
@@ -222,12 +222,12 @@ const HomeNavigator = () => {
             {/* <Route path="/subcr">
               <SubscriptionNavigator />
             </Route> */}
-            <Route path="/advisor">
+            {/* <Route path="/advisor">
               <AdvisorNavigator />
-            </Route>
-            {/* <Route path="/profile">
-              <ProfileNavigator />
             </Route> */}
+            <Route path="/profile">
+              <ProfileNavigator />
+            </Route>
           </Switch>
         </SupplierContext.Provider>
     </Segment>

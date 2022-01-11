@@ -24,7 +24,7 @@ class userController extends Controller
         
         $usr= user::leftJoin('companies','cmpnyPK','cmpnyFK')
         ->leftJoin('roles','rolePK','roleFK')
-        ->leftJoin('tbl_adl_advisor_level','adl_fk_user_id','id')
+        // ->leftJoin('tbl_adl_advisor_level','adl_fk_user_id','id')
         ->select('id','name','username','lastLogin','lastLoginIP','cmpnyName','cmpnyFK as cmpnyID','roleFK','rolename')
         ->get();
         return response()->json($usr);
@@ -147,18 +147,18 @@ class userController extends Controller
         return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete"]);
     }
 
-    // function getRoles(){
-        
-    //     $role=Auth::user()->getRoleLevel();
-    //     $roles= role::where('rolelevel','>=',$role)->get();
-    //     return response()->json($roles);
-    // }
     function getRoles(){
         
         $role=Auth::user()->getRoleLevel();
-        $roles= role::where('rolelevel','>=',5)->get();
+        $roles= role::where('rolelevel','>=',$role)->get();
         return response()->json($roles);
     }
+    // function getRoles(){
+        
+    //     $role=Auth::user()->getRoleLevel();
+    //     $roles= role::where('rolelevel','>=',5)->get();
+    //     return response()->json($roles);
+    // }
     function addUser(Request $request){
         // Auth::id()
         $role=Auth::user()->getRoleLevel();

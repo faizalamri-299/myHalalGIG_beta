@@ -197,7 +197,7 @@ const RenderDashboard = () => {
         <Grid>
           <Grid.Column textAlign="center">
 
-            {NewUser < 1 ? 
+            {NewUser ==null ? 
               <Message info>    
                 <Message.Header>Tiada Maklumat</Message.Header>
                 <p>Tiada Maklumat Dalam Pangkalan Data</p>
@@ -213,7 +213,7 @@ const RenderDashboard = () => {
             <Header as='h3' style={{ fontSize: '2em' }}>
               Senarai Pengguna Baru Mendaftar
             </Header>
-            {NewUser < 1 ? 
+            {NewUser ==null ? 
               <Message info>    
                 <Message.Header>Tiada Maklumat</Message.Header>
                 <p>Tiada Maklumat Dalam Pangkalan Data</p>
@@ -221,22 +221,7 @@ const RenderDashboard = () => {
               <RenderNewUser data={NewUser}/>}
           </Grid.Column>
         </Grid>
-          <br></br>
-            <Divider></Divider>
-          <br></br>
-        <Grid>
-          <Grid.Column textAlign="center">
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              Senarai Advisor Baru Mendaftar
-            </Header>
-            {NewUser < 1 ? 
-              <Message info>    
-                <Message.Header>Tiada Maklumat</Message.Header>
-                <p>Tiada Maklumat Dalam Pangkalan Data</p>
-              </Message> :
-              <RenderNewAdvisor/>}
-          </Grid.Column>
-        </Grid>
+          
       </Container>
     </Segment>    
 </>
