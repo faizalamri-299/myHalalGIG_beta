@@ -19,6 +19,9 @@ use App\Models\HASempletter;
 use App\Models\HASaudit;
 use App\Models\HAShalalrisk;
 use App\Models\HAStraining;
+use App\Models\HASSOP;
+use App\Models\HASProductHalalCert;
+use App\Models\HASOthers;
 use ZipArchive;
 use File;
 use Response;
@@ -30,16 +33,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UploadHASController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
-
+///////////////////////////////////////////////////////GET SECTION/////////////////////////////////////////////////////////////////////
     public function indexHASChecklist()
     {
         $companyID=Auth::user()->getCompany()->cmpnyPK;
@@ -168,33 +166,50 @@ class UploadHASController extends Controller
         return response()->json($HAStraining);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getHASSOP()
     {
-        //
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+
+        $HAStraining= HASSOP::where('cmpnyFK',$cmpnyPK)->get();
+        return response()->json($HAStraining);
     }
 
+    public function getHASPRoductHalalCert()
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+
+        $HAStraining= HASProductHalalCert::where('cmpnyFK',$cmpnyPK)->get();
+        return response()->json($HAStraining);
+    }
+
+    public function getHASOthers()
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+
+        $HAStraining= HASOthers::where('cmpnyFK',$cmpnyPK)->get();
+        return response()->json($HAStraining);
+    }
+///////////////////////////////////////////////////////GET SECTION/////////////////////////////////////////////////////////////////////
+    
+
+///////////////////////////////////////////////////////UPLOAD SECTION/////////////////////////////////////////////////////////////////////
     public function createHASChecklist(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASChecklist')) {
             $file      = $request->file('HASChecklist');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASChecklist;
-            $rawmaterial->hc_fk_company_id = $companyID;
+            $rawmaterial->hc_fk_company_id = $cmpnyPK;
             $rawmaterial->hc_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -208,19 +223,20 @@ class UploadHASController extends Controller
     public function createHASLabAnalysis(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASLabAnalysis')) {
             $file      = $request->file('HASLabAnalysis');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASLabAnalysis;
-            $rawmaterial->hla_fk_company_id = $companyID;
+            $rawmaterial->hla_fk_company_id = $cmpnyPK;
             $rawmaterial->hla_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -234,19 +250,20 @@ class UploadHASController extends Controller
     public function createHASRawMat(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASRawMat')) {
             $file      = $request->file('HASRawMat');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASRawMat;
-            $rawmaterial->hrm_fk_company_id = $companyID;
+            $rawmaterial->hrm_fk_company_id = $cmpnyPK;
             $rawmaterial->hrm_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -260,19 +277,20 @@ class UploadHASController extends Controller
     public function createHASSertu(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASSertu')) {
             $file      = $request->file('HASSertu');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";      
+            $dir="$ENcmpnyPK/HASFILE";      
             
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $path = Storage::putFileAs($dir, $file, $fileName);
             $rawmaterial = new HASSertu;
-            $rawmaterial->hs_fk_company_id = $companyID;
+            $rawmaterial->hs_fk_company_id = $cmpnyPK;
             $rawmaterial->hs_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -286,19 +304,20 @@ class UploadHASController extends Controller
     public function createHASSOPProductRecall(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASSOPProductRecall')) {
             $file      = $request->file('HASSOPProductRecall');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASSOPProductRecall;
-            $rawmaterial->hpr_fk_company_id = $companyID;
+            $rawmaterial->hpr_fk_company_id = $cmpnyPK;
             $rawmaterial->hpr_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -312,19 +331,20 @@ class UploadHASController extends Controller
     public function createHASSOPRawMat(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASSOPRawMat')) {
             $file      = $request->file('HASSOPRawMat');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASSOPRawMat;
-            $rawmaterial->hsrm_fk_company_id = $companyID;
+            $rawmaterial->hsrm_fk_company_id = $cmpnyPK;
             $rawmaterial->hsrm_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -338,18 +358,19 @@ class UploadHASController extends Controller
     public function createHASSOPSertu(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASSOPSertu')) {
             $file      = $request->file('HASSOPSertu');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";            
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";            
+            $path = Storage::putFileAs($dir, $file, $fileName);
             $rawmaterial = new HASSOPSertu;
-            $rawmaterial->hss_fk_company_id = $companyID;
+            $rawmaterial->hss_fk_company_id = $cmpnyPK;
             $rawmaterial->hss_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -363,19 +384,20 @@ class UploadHASController extends Controller
     public function createHASSOPTraceability(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASSOPTraceability')) {
             $file      = $request->file('HASSOPTraceability');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASSOPTraceability;
-            $rawmaterial->hst_fk_company_id = $companyID;
+            $rawmaterial->hst_fk_company_id = $cmpnyPK;
             $rawmaterial->hst_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -389,19 +411,20 @@ class UploadHASController extends Controller
     public function createHASTraceability(Request $request) //upload HAS RAW MAT
     {  
 
-        $companyID=Auth::user()->getCompany()->cmpnyPK;
-
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
         $crs=$request->id;
         if ($request->hasFile('HASTraceability')) {
             $file      = $request->file('HASTraceability');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
         
-            $dir="HASFILE/$companyID";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASTraceability;
-            $rawmaterial->ht_fk_company_id = $companyID;
+            $rawmaterial->ht_fk_company_id = $cmpnyPK;
             $rawmaterial->ht_file_name = $fileName;
             $rawmaterial->date = Carbon::now();
             $rawmaterial->refno = $request->refno;
@@ -415,13 +438,15 @@ class UploadHASController extends Controller
     public function postHAShalalpolicy(Request $request) {  
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
         $crs=$request->id;
         if ($request->hasFile('HAShalalpolicy')) {
             $file      = $request->file('HAShalalpolicy');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
-            $dir="HASFILE/$cmpnyPK";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HAShalalpolicy;
             $rawmaterial->cmpnyFK = $cmpnyPK;
@@ -438,13 +463,15 @@ class UploadHASController extends Controller
     public function postHASorgchart(Request $request) {  
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
         $crs=$request->id;
         if ($request->hasFile('HASorgchart')) {
             $file      = $request->file('HASorgchart');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
-            $dir="HASFILE/$cmpnyPK";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASorgchart;
             $rawmaterial->cmpnyFK = $cmpnyPK;
@@ -461,13 +488,16 @@ class UploadHASController extends Controller
     public function postHAStor(Request $request) {  
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
+        $ENcmpnyPK=dechex($cmpnyPK);
         $crs=$request->id;
         if ($request->hasFile('HAStor')) {
             $file      = $request->file('HAStor');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
         
-            $dir="HASFILE/$cmpnyPK";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HAStor;
             $rawmaterial->cmpnyFK = $cmpnyPK;
@@ -484,13 +514,15 @@ class UploadHASController extends Controller
     public function postHASempletter(Request $request) {  
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
         $crs=$request->id;
         if ($request->hasFile('HASempletter')) {
             $file      = $request->file('HASempletter');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
         
-            $dir="HASFILE/$cmpnyPK";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASempletter;
             $rawmaterial->cmpnyFK = $cmpnyPK;
@@ -507,13 +539,15 @@ class UploadHASController extends Controller
     public function postHASaudit(Request $request) {  
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
         $crs=$request->id;
         if ($request->hasFile('HASaudit')) {
             $file      = $request->file('HASaudit');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
         
-            $dir="HASFILE/$cmpnyPK";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HASaudit;
             $rawmaterial->cmpnyFK = $cmpnyPK;
@@ -530,13 +564,15 @@ class UploadHASController extends Controller
     public function postHAShalalrisk(Request $request) {  
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
         $crs=$request->id;
         if ($request->hasFile('HAShalalrisk')) {
             $file      = $request->file('HAShalalrisk');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
         
-            $dir="HASFILE/$cmpnyPK";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HAShalalrisk;
             $rawmaterial->cmpnyFK = $cmpnyPK;
@@ -553,13 +589,15 @@ class UploadHASController extends Controller
     public function postHAStraining(Request $request) {  
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
         $crs=$request->id;
         if ($request->hasFile('HAStraining')) {
             $file      = $request->file('HAStraining');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
         
-            $dir="HASFILE/$cmpnyPK";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $rawmaterial = new HAStraining;
             $rawmaterial->cmpnyFK = $cmpnyPK;
@@ -573,59 +611,350 @@ class UploadHASController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        //
+    public function postHASSOP(Request $request) {  
+
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
+        $crs=$request->id;
+        if ($request->hasFile('HASSOP')) {
+            $file      = $request->file('HASSOP');
+            $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
+        
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
+
+            $rawmaterial = new HASSOP;
+            $rawmaterial->cmpnyFK = $cmpnyPK;
+            $rawmaterial->filename = $fileName;
+            $rawmaterial->date = Carbon::now();
+            $rawmaterial->refno = $request->refno;
+            $rawmaterial->save();
+            $objdata = (object)['name'=>$request->name,'fileDir'=>$path,'rawmaterial'=>$rawmaterial];
+
+        return response()->json($objdata);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\UploadHAS  $uploadHAS
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UploadHAS $uploadHAS)
-    {
-        //
+    public function postHASProductHalalCert(Request $request) {  
+
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+
+        $crs=$request->id;
+        if ($request->hasFile('HASProductHalalCert')) {
+            $file      = $request->file('HASProductHalalCert');
+            $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
+        
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
+
+            $rawmaterial = new HASProductHalalCert;
+            $rawmaterial->cmpnyFK = $cmpnyPK;
+            $rawmaterial->filename = $fileName;
+            $rawmaterial->date = Carbon::now();
+            $rawmaterial->refno = $request->refno;
+            $rawmaterial->save();
+            $objdata = (object)['name'=>$request->name,'fileDir'=>$path,'rawmaterial'=>$rawmaterial];
+
+        return response()->json($objdata);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UploadHAS  $uploadHAS
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UploadHAS $uploadHAS)
-    {
-        //
-    }
+    public function postHASOthers(Request $request) {  
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UploadHAS  $uploadHAS
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UploadHAS $uploadHAS)
-    {
-        //
-    }
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
 
-    public function deleteHASChecklist(Request $request)
+        $crs=$request->id;
+        if ($request->hasFile('HASOthers')) {
+            $file      = $request->file('HASOthers');
+            $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
+        
+            $dir="$ENcmpnyPK/HASFILE";
+            $path = Storage::putFileAs($dir, $file, $fileName);
+
+            $rawmaterial = new HASOthers;
+            $rawmaterial->cmpnyFK = $cmpnyPK;
+            $rawmaterial->filename = $fileName;
+            $rawmaterial->date = Carbon::now();
+            $rawmaterial->refno = $request->refno;
+            $rawmaterial->save();
+            $objdata = (object)['name'=>$request->name,'fileDir'=>$path,'rawmaterial'=>$rawmaterial];
+
+        return response()->json($objdata);
+        }
+    }
+///////////////////////////////////////////////////////UPLOAD SECTION/////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////DOWNLOAD SECTION/////////////////////////////////////////////////////////////////////
+    public function downloadHASRawMat(Request $request)
     {
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASRawMat::where('id',$request->id)->value('hrm_file_name');
+        $rawmaterial = HASRawMat::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASSOPRawMat(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASSOPRawMat::where('id',$request->id)->value('hsrm_file_name');
+        $rawmaterial = HASSOPRawMat::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASTraceability(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASTraceability::where('id',$request->id)->value('ht_file_name');
+        $rawmaterial = HASTraceability::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASSOPTraceability(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASSOPTraceability::where('id',$request->id)->value('hst_file_name');
+        $rawmaterial = HASSOPTraceability::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASSOPProductRecall(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASSOPProductRecall::where('id',$request->id)->value('hpr_file_name');
+        $rawmaterial = HASSOPProductRecall::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASChecklist(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASChecklist::where('id',$request->id)->value('hc_file_name');
         $rawmaterial = HASChecklist::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASLabAnalysis(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASLabAnalysis::where('id',$request->id)->value('hla_file_name');
+        $rawmaterial = HASLabAnalysis::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASSertu(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASSertu::where('id',$request->id)->value('hs_file_name');
+        $rawmaterial = HASSertu::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASSOPSertu(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASSOPSertu::where('id',$request->id)->value('hss_file_name');
+        $rawmaterial = HASSOPSertu::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASHalalpolicy(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HAShalalpolicy::where('id',$request->id)->value('halalpolicy_filename');
+        $rawmaterial = HAShalalpolicy::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASOrgchart(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASorgchart::where('id',$request->id)->value('orgchart_filename');
+        $rawmaterial = HASorgchart::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASTor(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HAStor::where('id',$request->id)->value('tor_filename');
+        $rawmaterial = HAStor::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASEmpletter(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASempletter::where('id',$request->id)->value('empletter_filename');
+        $rawmaterial = HASempletter::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASAudit(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASaudit::where('id',$request->id)->value('audit_filename');
+        $rawmaterial = HASaudit::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASHalalrisk(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HAShalalrisk::where('id',$request->id)->value('halalrisk_filename');
+        $rawmaterial = HAShalalrisk::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASTraining(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HAStraining::where('id',$request->id)->value('training_filename');
+        $rawmaterial = HAStraining::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASSOP(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASSOP::where('id',$request->id)->value('filename');
+        $rawmaterial = HASSOP::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASProductHalalCert(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASProductHalalCert::where('id',$request->id)->value('filename');
+        $rawmaterial = HASProductHalalCert::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function downloadHASOthers(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASOthers::where('id',$request->id)->value('filename');
+        $rawmaterial = HASOthers::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+            
+        return response()->download($file_path);  
+    }
+
+    public function zipFolder()
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $cmpnyName=Auth::user()->getCompany()->cmpnyName;
+
+        $zip = new ZipArchive;
+        $fileName = storage_path('app/cache/HASFile_'.$cmpnyName.'.zip');
+        $file = ('HASFILE/').$cmpnyPK;
+        if($zip->open($fileName,ZipArchive::CREATE) === TRUE)
+        {
+            $files = File::files(storage_path('app/'.$ENcmpnyPK.'/HASFILE/'));
+            foreach($files as $key => $value){
+                $relativeNameinZipFile = basename($value);
+                $zip->addFile($value, $relativeNameinZipFile);
+            }
+            $zip->close();
+        }
+        return response()->download($fileName)->deleteFileAfterSend(true);
+    }
+///////////////////////////////////////////////////////DOWNLOAD SECTION/////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////DELETE SECTION/////////////////////////////////////////////////////////////////////
+    public function deleteHASChecklist(Request $request)
+    {
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASChecklist::where('id',$request->id)->value('hc_file_name');
+        $rawmaterial = HASChecklist::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
         
     }
@@ -635,17 +964,18 @@ class UploadHASController extends Controller
     
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASLabAnalysis::where('id',$request->id)->value('hla_file_name');
         $rawmaterial = HASLabAnalysis::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -654,17 +984,18 @@ class UploadHASController extends Controller
 
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASRawMat::where('id',$request->id)->value('hr_file_name');
         $rawmaterial = HASRawMat::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -672,17 +1003,18 @@ class UploadHASController extends Controller
     {
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASSertu::where('id',$request->id)->value('hs_file_name');
         $rawmaterial = HASSertu::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -691,17 +1023,18 @@ class UploadHASController extends Controller
         
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASSOPProductRecall::where('id',$request->id)->value('hspr_file_name');
         $rawmaterial = HASSOPProductRecall::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -710,17 +1043,18 @@ class UploadHASController extends Controller
     
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASSOPRawMat::where('id',$request->id)->value('hsrm_file_name');
         $rawmaterial = HASSOPRawMat::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -729,17 +1063,18 @@ class UploadHASController extends Controller
         
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASSOPSertu::where('id',$request->id)->value('hss_file_name');
         $rawmaterial = HASSOPSertu::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -747,17 +1082,18 @@ class UploadHASController extends Controller
     {
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASSOPTraceability::where('id',$request->id)->value('hst_file_name');
         $rawmaterial = HASSOPTraceability::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -765,17 +1101,18 @@ class UploadHASController extends Controller
     {
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASTraceability::where('id',$request->id)->value('ht_file_name');
         $rawmaterial = HASTraceability::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -783,17 +1120,18 @@ class UploadHASController extends Controller
     {
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HAShalalpolicy::where('id',$request->id)->value('halalpolicy_filename');
         $rawmaterial = HAShalalpolicy::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
 
@@ -801,121 +1139,164 @@ class UploadHASController extends Controller
     {
         
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASorgchart::where('id',$request->id)->value('orgchart_filename');
         $rawmaterial = HASorgchart::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
     public function deleteHAStor(Request $request)
     {
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HAStor::where('id',$request->id)->value('tor_filename');
         $rawmaterial = HAStor::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
     public function deleteHASempletter(Request $request)
     {
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASempletter::where('id',$request->id)->value('empletter_filename');
         $rawmaterial = HASempletter::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
     public function deleteHASaudit(Request $request)
     {
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HASaudit::where('id',$request->id)->value('audit_filename');
         $rawmaterial = HASaudit::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
     public function deleteHAShalalrisk(Request $request)
     {
 
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HAShalalrisk::where('id',$request->id)->value('halalrisk_filename');
         $rawmaterial = HAShalalrisk::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
     public function deleteHAStraining(Request $request)
     {
         
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
         $filename = HAStraining::where('id',$request->id)->value('training_filename');
         $rawmaterial = HAStraining::where('id',$request->id)->firstOrFail();
 
-        $image_path = public_path("/files/HASFILE/$cmpnyPK/$filename");
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
             $rawmaterial->delete();
-            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
         else{
-            return response()->json(['isSuccess' =>false ,'image_path'=>$image_path]);
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
         }
     }
-    public function zipFolder()
+    public function deleteHASSOP(Request $request)
     {
+        
         $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
-        $cmpnyName=Auth::user()->getCompany()->cmpnyName;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASSOP::where('id',$request->id)->value('filename');
+        $rawmaterial = HASSOP::where('id',$request->id)->firstOrFail();
 
-        $zip = new ZipArchive;
-        $fileName = 'files\cache\HASFile_'.$cmpnyName.'.zip';
-        $file = ('files\HASFILE\\').$cmpnyPK;
-        if($zip->open($fileName,ZipArchive::CREATE) === TRUE)
-        {
-            $files = File::files(public_path('files\HASFILE\\').$cmpnyPK);
-            foreach($files as $key => $value){
-                $relativeNameinZipFile = basename($value);
-                $zip->addFile($value, $relativeNameinZipFile);
-            }
-            $zip->close();
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
+            $rawmaterial->delete();
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
         }
-        return response()->download($fileName)->deleteFileAfterSend(true);
+        else{
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
+        }
     }
+    public function deleteHASProductHalalCert(Request $request)
+    {
+        
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASProductHalalCert::where('id',$request->id)->value('filename');
+        $rawmaterial = HASProductHalalCert::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
+            $rawmaterial->delete();
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
+        }
+        else{
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
+        }
+    }
+    public function deleteHASOthers(Request $request)
+    {
+        
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $filename = HASOthers::where('id',$request->id)->value('filename');
+        $rawmaterial = HASOthers::where('id',$request->id)->firstOrFail();
+
+        $file_path = storage_path("app/$ENcmpnyPK/HASFILE/$filename");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
+            $rawmaterial->delete();
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
+        }
+        else{
+            return response()->json(['isSuccess' =>false ,'file_path'=>$file_path]);
+        }
+    }
+///////////////////////////////////////////////////////DELETE SECTION/////////////////////////////////////////////////////////////////////
+
 }

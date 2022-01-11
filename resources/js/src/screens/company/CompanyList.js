@@ -29,27 +29,18 @@ const CompanyList = () => {
       <List.Item key={i} as={Link} to={`${url}/details/${i}`}>
         <List.Content>
         <List.Header>{x.cmpnyName}</List.Header>
-        {/* <List.Content floated='right'>{x.lang}</List.Content> */}
-        
+        <List.Content>{x.username}</List.Content>
         </List.Content>
       </List.Item>
     );
-    return <List className="listScroll" celled ordered divided verticalAlign='middle' selection>
+    return <List celled ordered divided selection>
       {listItems}
-      {/* <List.Item>
-              Dogs
-            <List.List>
-                <List.Item>Labradoodles</List.Item>
-                <List.Item>Shiba Inu</List.Item>
-                <List.Item>Mastiff</List.Item>
-              </List.List>
-            </List.Item> */}
     </List>
   }
   return (
 
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-      <div className="in innerContainer">
+      <div className="in innerContainer listScroll">
         <Header as='h3'>Senarai Syarikat</Header>
         {cmpny &&
           <RenderCompany data={cmpny}/>

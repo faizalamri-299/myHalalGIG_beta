@@ -102,14 +102,14 @@ const [password2, setPassword2] = React.useState("default");
                 />
                
               </Segment>
-             {
+             {/* {
                subcrData&&<Segment > 
                 <Header sub>Subscription Period</Header>
                 <span>{moment(new Date(subcrData.dateStart)).format('Do MMMM YYYY')+' - '+moment(new Date(subcrData.dateEnd)).format('Do MMMM YYYY')}</span>
                
              
             </Segment>
-            } 
+            }  */}
             
             </Segment.Group>
         </div>

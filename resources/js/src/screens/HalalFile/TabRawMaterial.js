@@ -137,9 +137,9 @@ const TabRawMaterial = () => {
           { text: 'Senarai Bahan Mentah Syarikat '+cmpny.cmpnyName, fontSize: 14, bold:true, margin: [0, 0 ,0, 10]},
           table(
               // External data
-              tabledata,['sp_name', 'sp_address', '', 'sprm_name', 'sprm_scientific_name', 'sprm_material_source', 'spcb_cert_bodies', 'spcb_date_cert', 'sprm_support_doc'],
+              tabledata,['sp_name', 'sp_address', '', 'sprm_name', 'sprm_scientific_name', 'sprm_material_source', 'spcb_cert_bodies', 'spcb_date_cert'],
               // Custom columns widths
-              [75, 75, 75, 75, 75, 75, 75, 75, 75],
+              [86, 86, 86, 86, 86, 86, 86, 86],
               // Show headers?
               true,
               // Custom headers
@@ -152,18 +152,17 @@ const TabRawMaterial = () => {
                 {text: 'Sumber Bahan', style: 'tableHeader', alignment: 'center',fillColor: '#add8e6', fontSize: 10},
                 {text: 'Badan Pengeluar Sijil Halal', style: 'tableHeader', alignment: 'center',fillColor: '#add8e6', fontSize: 10}, 
                 {text: 'Tarikh Tamat Sijil', style: 'tableHeader', alignment: 'center',fillColor: '#add8e6', fontSize: 10}, 
-                {text: 'Dokumen Sokongan', style: 'tableHeader', alignment: 'center',fillColor: '#add8e6', fontSize: 10}, 
-             ],
+              ],
               // Custom layout, use '' for no layout
               ''),
               { text: 'Dikemaskini Pada '+moment().format("DD/MM/YYYY"), fontSize: 11, italics:true, margin: [25, 25 ,0 ,25], alignment: 'right'},
-              //{ text: 'data:image/jpeg;base64,'},
+              // { text: 'data:image/jpeg;base64,'},
             ],
            
   }
   try
     { 
-     pdfMake.createPdf(dd).open()
+      pdfMake.createPdf(dd).open()
     }
   catch(err){
     console.log('error',err)
@@ -172,15 +171,51 @@ const TabRawMaterial = () => {
   }
 }
 
+const RenderSupplier = props => {
+
+  const data = props.data;
+  
+  console.log("asdasdasdasdas",data)
+  const listItems = data.map((x) =>
+  <Table.Row > {x.fk_rmsd_raw_mat_id == null ? 
+    null
+    :
+    <>
+    <Table.Cell collapsing>{x.sp_name}</Table.Cell>
+    <Table.Cell>{x.sprm_name}</Table.Cell>
+    <Table.Cell collapsing><Button basic color='teal' content='black' href={'/zipSupportDoc'+x.fk_rmsd_raw_mat_id}>Download</Button>
+    </Table.Cell>
+    </>
+  
+  
+  }
+    
+ </Table.Row>
+  );
+  return <Table basic>
+<Table.Header>
+ <Table.Row>
+   <Table.HeaderCell>Nama Pembekal</Table.HeaderCell>
+   <Table.HeaderCell>Bahan Mentah</Table.HeaderCell>
+    <Table.HeaderCell>Support Document</Table.HeaderCell>
+ </Table.Row>
+</Table.Header>
+
+<Table.Body>
+  {listItems}
+</Table.Body>
+</Table>
+}
+
   return (
 
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
       <div className="in innerContainer">
         <Header as='h3'>Senarai Bahan Mentah</Header> 
         <Button color="teal" fluid onClick={()=>printDocument()}>Cetak</Button>
-        {/* {product &&
+        {product &&
           <RenderSupplier data={product}/>
-        } */}
+        }
         <Divider></Divider>
         
       <Header as='h3'>Prosedur Operasi Standard Kawalan Bahan Mentah</Header>

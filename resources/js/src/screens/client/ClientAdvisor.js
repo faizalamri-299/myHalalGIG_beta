@@ -18,8 +18,9 @@ import {Switch,useParams,Link,useRouteMatch} from "react-router-dom";
 import * as moment from 'moment';
 import {AuthContext} from '../../screens/auth/auth';
 
-
 import { getClientAdvisor,ClientContext,postAdvisorDetails,deleteApplication } from './client';
+
+import dp from '../../assets/img/defaultphoto.png';
 
 
 const ClientAdvisor = () => {
@@ -66,7 +67,7 @@ const ClientAdvisor = () => {
     <Popup
       trigger={
     <Card >
-    <Image src={x.advImg == null ?x.advImg : '/images/advisorNoPhoto.png'} wrapped ui={false}/>
+    <Image src={x.advImg && x.advImg.advImage? x.advImg.advImage:dp} wrapped ui={false}/>
     <Card.Content  className="padding" color='grey'>
       <Card.Header >{x.name}&nbsp;&nbsp;{x.level_max_user == 1 ?'🔶' : 
                                   x.level_max_user == 3 ? '🔷' :
@@ -139,37 +140,7 @@ const ClientAdvisor = () => {
           advisorclient &&
             <RenderCompany data={advisorclient}/>
         }
-          {/* <Modal style={{position:'relative',height:'auto'}} onClose={() =>{ setModalUpdateOpen(false),resetForm()}} open={modalOpen} centered={true}>
-            <Modal.Content image>
-            <Image size='small' src='/images/qm.png' wrapped centered/>
-            <div hidden="true">
-            <Form>
-              <Form.Group widths='equal'>
-                <Form.Input
-                  fluid
-                  onChange={e=>setadvisor(e.target.value)}
-                  value={id}
-                />
-              </Form.Group> 
-            </Form> 
-          </div>
-          <Modal.Description>
-          <Header><span>&emsp;&ensp;</span>Pilih Advisor</Header>
-          <p><span>&emsp;&ensp;&ensp;</span>
-            Adakah Anda Pasti Untuk Memilih <strong>{name}</strong> Sebagai Advisor Anda?
-          </p>
-        </Modal.Description>
-            </Modal.Content>
-            <Modal.Actions>
-              
-              <Button color='red' onClick={() => {setModalUpdateOpen(false); resetForm();}}>
-                <Icon name='remove' /> Tidak
-              </Button>
-              <Button color='green' onClick={() => {setModalUpdateOpen(false); updateForm();}}>
-                <Icon name='checkmark' /> Ya
-              </Button>
-            </Modal.Actions>
-          </Modal>  */}
+         
       </div>
 
 

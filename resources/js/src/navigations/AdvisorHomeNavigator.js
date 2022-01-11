@@ -23,7 +23,7 @@ import ProductNavigator from './ProductNavigator';
 import HASNavigator from './HASNavigator';
 import HalalFileNavigator from './HalalNavigator';
 import CertBodiesNavigator from './CertBodiesNavigator';
-import Dashboard from '../screens/Dashboard';
+import DashboardAdvisor from '../screens/DashboardAdvisor';
 import SubscriptionNavigator from './SubscriptionNavigator';
 import AdvisorNavigator from './AdvisorNavigator';
 import AdvisorProfile from '../screens/advisor/AdvisorProfile';
@@ -169,7 +169,7 @@ const HomeNavigator = () => {
       <Segment className="innerContainer" basic>
         <Switch>
           <Route exact path="/">
-            <Dashboard />
+            <DashboardAdvisor />
           </Route>
           <Route path="/advisorprofile">
               <AdvisorProfile data={premises}  onDataChange={updatePremise}  id={cmpny.cmpnyPK}/>

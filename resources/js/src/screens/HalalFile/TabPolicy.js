@@ -445,12 +445,24 @@ const print8=()=>{
       <Table.Row>
         <Table.Cell>1</Table.Cell>
         <Table.Cell>Skim Umum (Versi Bahasa Inggeris)</Table.Cell>
-        <Table.Cell><Button color="teal" fluid onClick={()=>print3()}>Muat Turun</Button></Table.Cell>
+        <Table.Cell><Button color="teal" 
+                                fluid 
+                                href="/files/HALAL POLISI (VERSI BI).docx"
+                                target="_blank">Muat Turun
+                        </Button>
+            </Table.Cell>
+        {/* <Table.Cell><Button color="teal" fluid onClick={()=>print3()}>Muat Turun</Button></Table.Cell> */}
       </Table.Row>
       <Table.Row>
         <Table.Cell>1</Table.Cell>
         <Table.Cell>Skim Umum (Versi Bahasa Melayu)</Table.Cell>
-        <Table.Cell><Button color="teal" fluid onClick={()=>printmalay()}>Muat Turun</Button></Table.Cell>
+        <Table.Cell><Button color="teal" 
+                                fluid 
+                                href="/files/HALAL POLISI (VERSI BM).docx"
+                                target="_blank">Muat Turun
+                        </Button>
+            </Table.Cell>
+        {/* <Table.Cell><Button color="teal" fluid onClick={()=>printmalay()}>Muat Turun</Button></Table.Cell> */}
       </Table.Row>
       {/* <Table.Row>
         <Table.Cell>4</Table.Cell>

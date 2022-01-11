@@ -20,7 +20,9 @@ import {UploadHASContext,
         postHASRawMat,
         postHASSOPRawMat,
         deleteHASRawMat,
-        deleteHASSOPRawMat} from './UploadHAS';
+        deleteHASSOPRawMat,
+        downloadHASRawMat
+      ,downloadHASSOPRawMat} from './UploadHAS';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -56,6 +58,14 @@ const TabRawMaterial = () => {
     postHASSOPRawMat(formData).then(x=>{
       console.log(x)
     }).catch(e=>console.log(e))
+  }
+
+  const downloadfile=(pk)=>{
+    downloadHASRawMat(pk).then(console.log(pk));
+  }
+
+  const downloadfileSOP=(pk)=>{
+    downloadHASSOPRawMat(pk).then(console.log(pk));
   }
 
   const deleteRawMat=(pk)=>{
@@ -124,7 +134,7 @@ const TabRawMaterial = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.hrm_fk_company_id+"/"+x.hrm_file_name} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfile(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteRawMat(x.id)} icon='trash alternate' />} />    
       </Button.Group>
        {/* <Button size='mini' compact basic float='right'color="teal" href={"/files/HASFILE/"+x.hrm_fk_company_id+"/RawMaterial/"+x.hrm_file_name} target="_blank">Muat Turun</Button>
@@ -160,7 +170,7 @@ const TabRawMaterial = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.hsrm_fk_company_id+"/"+x.hsrm_file_name} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfileSOP(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteSOPRawMat(x.id)} icon='trash alternate' />} />
         
       </Button.Group>

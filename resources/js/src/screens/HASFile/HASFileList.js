@@ -167,7 +167,7 @@ const panes = [
                   </Tab.Pane>,
   },
   {
-    menuItem: { key: 'antityphoid', content: '5. Rekod Sembelihan' },
+    menuItem: { key: 'slaughtering', content: '5. Rekod Sembelihan' },
     render: () => <Tab.Pane>
                     <TabRekodSembelihan/>
                   </Tab.Pane>,
@@ -185,19 +185,13 @@ const panes = [
                   </Tab.Pane>,
   },
   {
-    menuItem: { key: 'OrgIHC', content: '8.Rekod Carta Organisasi Internal Halal Committee (IHC)' },
-    render: () => <Tab.Pane>
-                    <TabOrgIHC/>
-                  </Tab.Pane>,
-  },
-  {
-    menuItem: { key: 'kesanhalal', content: '9.Rekod Pengesanan Halal' },
+    menuItem: { key: 'kesanhalal', content: '8.Rekod Pengesanan Halal' },
     render: () => <Tab.Pane>
                     <TabRekodKesanHalal/>
                   </Tab.Pane>,
   },
   {
-    menuItem: { key: 'akujanji', content: '10. Surat Aku Janji' },
+    menuItem: { key: 'akujanji', content: '9. Surat Aku Janji' },
     render: () => <Tab.Pane>
                     <TabAkuJanji/>
                   </Tab.Pane>,

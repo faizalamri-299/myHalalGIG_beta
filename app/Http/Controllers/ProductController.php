@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use DB;
 use Response;
+use ZipArchive;
+use File;
 use  App\Models\company;
 use  App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -58,11 +60,15 @@ class ProductController extends Controller
         $productdetail = DB::table('tbl_prsp_product_has_supplier')
             // ->join('tbl_sp_supplier', 'tbl_prsp_product_has_supplier.prsp_fk_supplier_id', '=', 'tbl_sp_supplier.id')//join table supplier
             ->join('tbl_sprm_supplier_has_raw_mat', 'tbl_prsp_product_has_supplier.prsp_fk_rawmat_id', '=', 'tbl_sprm_supplier_has_raw_mat.id')//join table raw mat
+
             ->Leftjoin('tbl_sp_supplier', 'tbl_sprm_supplier_has_raw_mat.sprm_fk_supplier_id', '=', 'tbl_sp_supplier.id')
+            ->LeftJoin('tbl_rmsd_raw_mat_has_support_document', 'tbl_sprm_supplier_has_raw_mat.id', '=', 'tbl_rmsd_raw_mat_has_support_document.fk_rmsd_raw_mat_id')//join table cert bodies
+
             ->join('tbl_pr_product', 'tbl_prsp_product_has_supplier.prsp_fk_product_id', '=', 'tbl_pr_product.id')//join table product
             ->Leftjoin('tbl_spcb_supplier_has_cert_bodies', 'tbl_sprm_supplier_has_raw_mat.sprm_fk_id_halal_cert', '=', 'tbl_spcb_supplier_has_cert_bodies.id')//join table cert bodies
+
             ->select('tbl_pr_product.prsp_fk_company_id','tbl_sp_supplier.sp_name','tbl_sp_supplier.sp_address','tbl_sprm_supplier_has_raw_mat.sprm_name','tbl_sprm_supplier_has_raw_mat.sprm_scientific_name', 'tbl_sprm_supplier_has_raw_mat.sprm_material_source','tbl_spcb_supplier_has_cert_bodies.spcb_cert_bodies',
-            DB::raw('DATE_FORMAT(tbl_spcb_supplier_has_cert_bodies.spcb_date_cert, "%d/%m/%Y") AS spcb_date_cert'))
+            DB::raw('DATE_FORMAT(tbl_spcb_supplier_has_cert_bodies.spcb_date_cert, "%d/%m/%Y") AS spcb_date_cert'),'tbl_rmsd_raw_mat_has_support_document.rmsd_name','tbl_rmsd_raw_mat_has_support_document.fk_rmsd_raw_mat_id')
             ->where('tbl_pr_product.prsp_fk_company_id',$sessionid)
             ->groupBy('tbl_prsp_product_has_supplier.prsp_fk_rawmat_id') //groupkan senarai raw material yg digunakan
             ->get();  
@@ -70,12 +76,31 @@ class ProductController extends Controller
         return response()->json($productdetail);
     }
 
+    public function postRawMat(Request $request) //upload HAS RAW MAT
+    {  
+
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        
+        $crs=$request->id;
+        if ($request->hasFile('HASChecklist')) {
+            $file      = $request->file('HASChecklist');
+            $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
+
+        
+            $dir="$ENcmpnyPK/rawmaterial";
+            $path = Storage::putFileAs($dir, $file, $fileName);
+            $objdata = (object)['fileDir'=>$path];
+
+        return response()->json($objdata);
+        }
+    }
+
     public function getCompanyAdvisorRM(Request $request){ //for list of raw material for company in advisor
 
         $sessionid = $request->ad_fk_company_id;
 
         $productdetail = DB::table('tbl_prsp_product_has_supplier')
-            // ->join('tbl_sp_supplier', 'tbl_prsp_product_has_supplier.prsp_fk_supplier_id', '=', 'tbl_sp_supplier.id')//join table supplier
             ->join('tbl_sprm_supplier_has_raw_mat', 'tbl_prsp_product_has_supplier.prsp_fk_rawmat_id', '=', 'tbl_sprm_supplier_has_raw_mat.id')//join table raw mat
             ->Leftjoin('tbl_sp_supplier', 'tbl_sprm_supplier_has_raw_mat.sprm_fk_supplier_id', '=', 'tbl_sp_supplier.id')
             ->join('tbl_pr_product', 'tbl_prsp_product_has_supplier.prsp_fk_product_id', '=', 'tbl_pr_product.id')//join table product
@@ -194,6 +219,7 @@ class ProductController extends Controller
     public function destroy(Request $request)
     {
         $product = product::where('id',$request->pk)->first();
+        $product->productdetail()->delete();
         $product->delete();
         return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete"]);
     }
@@ -205,6 +231,26 @@ class ProductController extends Controller
         $productdetail->delete();
 
         return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete"]);
+    }
+
+    public function downloadSupportDoc($id)
+    {
+        $id = $id;
+        $raw_mat_name = RawMaterial::where('id',$id)->value('sprm_name');
+        $zip = new ZipArchive;
+        $fileName = storage_path('app/support_doc/support_doc_'.$raw_mat_name.'.zip');
+
+        $file = ('support_doc/').$id;
+        if($zip->open($fileName,ZipArchive::CREATE) === TRUE)
+        {
+            $files = File::files(storage_path('app/support_doc/'.$id));
+            foreach($files as $key => $value){
+                $relativeNameinZipFile = basename($value);
+                $zip->addFile($value, $relativeNameinZipFile);
+            }
+            $zip->close();
+        }
+        return response()->download($fileName)->deleteFileAfterSend(true);
     }
 
     function encodeMaster( $obj ) 

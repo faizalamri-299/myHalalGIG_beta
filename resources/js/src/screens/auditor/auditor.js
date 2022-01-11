@@ -24,5 +24,35 @@ export const saveChecklist = (data) => {
       reject(error);
     });
   });
+}
+
+export const getsubuserdata = () => {
+    return new Promise( (resolve, reject)=> {
+      axios.get('/getsubuserdata').then(({ data }) => resolve(data))
+      .catch( (error)=> {
+        sessionRedirect(error)
+        reject(error);
+      });
+    });
+}
+
+export const getalluser = () => {
+  return new Promise( (resolve, reject)=> {
+    axios.get('/getalluser').then(({ data }) => resolve(data))
+    .catch( (error)=> {
+      sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const postUser = (data) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/postuser',data).then(({ data }) => resolve(data))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
 
 }

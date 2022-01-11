@@ -34,3 +34,36 @@ export const getLabAnalysis = () => {
     });
   });
 }
+
+export const postRawMat=(data,progress)=>{
+  return new Promise( (resolve, reject)=> {
+    const config = {
+      onUploadProgress: progress
+  }
+    axios.post('/postRawMat', data,config)
+          .then((data) => {
+            swal("Berjaya!", "Maklumat telah berjaya disimpan!", "success").then((result) => {
+              console.log(result);
+              if(result) {
+                //location.reload();
+              } else {
+                //location.reload();
+              }
+            });
+              ({ data }) => resolve(data);
+          })
+          .catch( (error)=> {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+            reject(error.response.data);
+          });
+    });
+ }

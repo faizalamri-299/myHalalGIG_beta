@@ -65,7 +65,7 @@ const CompanyAdvisorRequest = () => {
     const data = props.data;
     const listItems = data.map((x,i) =>
       <List.Item key={i}>
-        {x.cmpnyConfig.headerLogo == null ? <Image size='small' src='/images/nophoto.png' /> :<Image size='small' src={x.cmpnyConfig.headerLogo} />}
+        {/* {x.cmpnyConfig.headerLogo == null ? <Image size='small' src='/images/nophoto.png' /> :<Image size='small' src={x.cmpnyConfig.headerLogo} />} */}
 
 
         <List.Content>  

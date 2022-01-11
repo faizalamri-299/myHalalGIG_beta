@@ -18,7 +18,8 @@ import {Switch,Route,Link,useRouteMatch} from "react-router-dom";
 
 import {UploadHASContext,
         postHASAudit,
-        deleteHASAudit} from './UploadHAS';
+        deleteHASAudit,
+        downloadHASAudit} from './UploadHAS';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -43,6 +44,10 @@ const TabHASaudit = () => {
     }).catch(e=>console.log(e))
   }
 
+  const downloadfile=(pk)=>{
+    downloadHASAudit(pk).then(console.log(pk));
+  }
+  
   const deleteFile=(pk)=>{
     swal({
       title: "Adakah Anda Pasti?",
@@ -81,7 +86,7 @@ const TabHASaudit = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.cmpnyFK+"/"+x.audit_filename} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfile(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteFile(x.id)} icon='trash alternate' />} />
         
       </Button.Group>
@@ -90,7 +95,7 @@ const TabHASaudit = () => {
      </Table.Cell>
    </Table.Row>
     );
-    return <Table>
+    return <Table fluid>
       <Table.Header>
       <Table.Row>
         <Table.HeaderCell>Nama Fail</Table.HeaderCell>
@@ -110,30 +115,32 @@ const TabHASaudit = () => {
 
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
       <div className="in innerContainer">
-        <Header as='h3'>Senarai Semak Audit Halal Dalaman</Header> 
-        <Form.Group style={{display:'flex'}}>
-        <Form.Input
-            label='Fail'
-            type="file"
-            onChange={e=>setfilename(e.target.files[0])}
-          /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <Form.Input
-              label='No Rujukan'
+        <Header as='h3'>Senarai Semak Audit Halal Dalaman</Header>
+        <Form>
+          <Form.Group>
+            <Form.Input
+              type="file"
+              onChange={e=>setfilename(e.target.files[0])}
+              
+              placeholder='File'
+            />
+            <Form.Input
+              placeholder='Reference Number'  
               onChange={e=>setrefno(e.target.value)}
               value={refno}
+              width={5}
+              
             />
-          <Button icon labelPosition='right' floated='right' onClick={() => {uploadFile();}}>
-            Muat Naik
-            <Icon name='right arrow' />
-          </Button>
+            <Form.Field>
+              <Button icon floated="right" onClick={() => {uploadFile();}}>Muat Naik<Icon name='right arrow' /></Button>
+            </Form.Field>
         </Form.Group>
+        </Form> 
+        
           {HASaudit &&
             <RenderHAS data={HASaudit}/>
           }
         <Divider>
-      {/* <Header as='h4'>
-        Prosedur Operasi Standard
-      </Header> */}
     </Divider>
       </div>
     </Transition>

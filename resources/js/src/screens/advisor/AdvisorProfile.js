@@ -369,7 +369,7 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
               <Grid textAlign='left' stackable columns={2} style={{ width: '100%' }}>
 
                 <Grid.Column style={{ width: '50%'}} >
-                  <Image src={advsr.advImg && advsr.advImg.profilePicture? advsr.advImg.profilePicture:dp} size="small" centered style={{borderRadius: 400/ 2}}/>
+                  <Image src={advsr.advImg ? advsr.advImg.profilePicture:dp} size="small" centered style={{borderRadius: 400/ 2}}/>
 
                   <HeaderAction as="h6"
               buttonRight={

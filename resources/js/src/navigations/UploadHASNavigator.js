@@ -3,7 +3,7 @@ import React from 'react'
 import {Switch,Route,Link,useRouteMatch} from "react-router-dom";
 import UploadHASList from '../screens/uploadHAS/UploadHASList';
 
-import {UploadHASContext,getHASRawMat,getHASSOPRawMat,getHASTraceability,getHASSOPTraceability,getHASSOPProductRecall,getHASChecklist,getHASLabAnalysis,getHASSertu,getHASSOPSertu,getHASHalalpolicy,getHASOrgchart,getHASTor,getHASEmpletter,getHASAudit,getHASHalalrisk,getHASTraining} from '../screens/uploadHAS/UploadHAS';
+import {UploadHASContext,getHASRawMat,getHASSOPRawMat,getHASTraceability,getHASSOPTraceability,getHASSOPProductRecall,getHASChecklist,getHASLabAnalysis,getHASSertu,getHASSOPSertu,getHASHalalpolicy,getHASOrgchart,getHASTor,getHASEmpletter,getHASAudit,getHASHalalrisk,getHASTraining,getHASSOP,getHASProductHalalCert,getHASOthers} from '../screens/uploadHAS/UploadHAS';
 
 
 const UploadHASNavigator = () => {
@@ -24,6 +24,10 @@ const UploadHASNavigator = () => {
     const [HASaudit, setHASaudit] = React.useState(null);
     const [HAShalalrisk, setHAShalalrisk] = React.useState(null);
     const [HAStraining, setHAStraining] = React.useState(null);
+    const [HASSOP, setHASSOP] = React.useState(null);
+    const [HASProductHalalCert, setHASProductHalalCert] = React.useState(null);
+    const [HASOthers, setHASOthers] = React.useState(null);
+
 
     
     let { path, url } = useRouteMatch();
@@ -80,14 +84,23 @@ const UploadHASNavigator = () => {
         getHASTraining().then(x => {
           setHAStraining(x);
         })
+        getHASSOP().then(x => {
+          setHASSOP(x);
+        })
+        getHASProductHalalCert().then(x => {
+          setHASProductHalalCert(x);
+        })
+        getHASOthers().then(x => {
+          setHASOthers(x);
+        })
       };
       bootstrapAsync();
   
     }, []);
 
   const halalfileContext = React.useMemo(
-    () =>({HASRawMat, HASSOPRawMat,HASTraceability,HASSOPTraceability,HASSOPProductRecall,HASChecklist,HASLabAnalysis,HASSertu, HASSOPSertu,HAShalalpolicy,HASorgchart,HAStor,HASempletter,HASaudit,HAShalalrisk,HAStraining}),
-    [HASRawMat, HASSOPRawMat,HASTraceability,HASSOPTraceability,HASSOPProductRecall,HASChecklist,HASLabAnalysis,HASSertu, HASSOPSertu,HAShalalpolicy,HASorgchart,HAStor,HASempletter,HASaudit,HAShalalrisk,HAStraining]
+    () =>({HASRawMat, HASSOPRawMat,HASTraceability,HASSOPTraceability,HASSOPProductRecall,HASChecklist,HASLabAnalysis,HASSertu, HASSOPSertu,HAShalalpolicy,HASorgchart,HAStor,HASempletter,HASaudit,HAShalalrisk,HAStraining,HASSOP,HASProductHalalCert,HASOthers}),
+    [HASRawMat, HASSOPRawMat,HASTraceability,HASSOPTraceability,HASSOPProductRecall,HASChecklist,HASLabAnalysis,HASSertu, HASSOPSertu,HAShalalpolicy,HASorgchart,HAStor,HASempletter,HASaudit,HAShalalrisk,HAStraining,HASSOP,HASProductHalalCert,HASOthers]
 );
   return (
     <UploadHASContext.Provider value={halalfileContext}>

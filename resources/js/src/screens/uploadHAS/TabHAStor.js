@@ -18,7 +18,8 @@ import {Switch,Route,Link,useRouteMatch} from "react-router-dom";
 
 import {UploadHASContext,
         postHASTor,
-        deleteHASTor} from './UploadHAS';
+        deleteHASTor,
+        downloadHASTor} from './UploadHAS';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -41,6 +42,10 @@ const TabHAStor = () => {
     postHASTor(formData).then(x=>{
       console.log(x)
     }).catch(e=>console.log(e))
+  }
+
+  const downloadfile=(pk)=>{
+    downloadHASTor(pk).then(console.log(pk));
   }
 
   const deleteFile=(pk)=>{
@@ -81,7 +86,7 @@ const TabHAStor = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.cmpnyFK+"/"+x.tor_filename} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfile(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteFile(x.id)} icon='trash alternate' />} />
         
       </Button.Group>

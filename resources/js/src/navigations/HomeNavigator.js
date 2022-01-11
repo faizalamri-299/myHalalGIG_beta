@@ -28,18 +28,45 @@ import SubscriptionNavigator from './SubscriptionNavigator';
 import AdvisorNavigator from './AdvisorNavigator';
 import ClientAdvisorRecordNavigator from './ClientAdvisorRecordNavigator';
 import AdvisorListAll from '../screens/advisor/AdvisorListAll';
+import {SupplierContext, getNewUser} from '../screens/DashboardAPI';
 
 
 
 const HomeNavigator = () => {
     const [activeItem, setactiveItem] = React.useState(window.location.pathname.split("/")[1])
     const { profile,signOut,changeAccess } = React.useContext(AuthContext);
-    let { path, url } = useRouteMatch();
+
+    const [rawMat, setRawMat] = React.useState(null);
+    const [NewUser, setNewUser] = React.useState(null);
+    const [CountTotal, setCountTotal] = React.useState(null);
+
+
+    let { path, url } = useRouteMatch(); 
+    React.useEffect(() => {
+      const bootstrapAsync = async () => {
+       
+      };
+
+      // getNewUser().then(x=>{
+      //   console.log(x);
+      //   if(typeof x.data!=="undefined") setData(x.data);
+
+      //   if(typeof x.rawmaterial!=="undefined") {
+      //     setNewUser(x.usr);
+      //     setCountTotal(x.totalcompany);
+  
+      bootstrapAsync();
+  
+    }, []);
+
+  const homepageContext = React.useMemo(
+    () =>({NewUser}),
+    [NewUser]
+  );
     
   return (
 ////////////////////////////////////////////////////TOP VERTICAL NAV//////////////////////////////////////////////////////////////////
-    <div style={{height:'100vh',display:'flex', flexDirection:'column' }}>
-      
+    <div style={{height:'100vh',display:'flex', flexDirection:'column' }}> 
     <Menu borderless stackable attached='top' inverted color={'teal'}size='large'>
       <Menu.Item>
         <Image
@@ -79,12 +106,7 @@ const HomeNavigator = () => {
           to="/company"
           active={activeItem === 'company'}
         />
-        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('subcr')}
-          icon= 'building outline'
-          name='Syarikat'
-          to="/subcr"
-          active={activeItem === 'subcr'}
-        /> */}
+       
         {/* <Menu.Item as={Link} onClick={()=>setactiveItem('premises')}
           icon= 'building outline'
           name='Premis'
@@ -164,48 +186,50 @@ const HomeNavigator = () => {
 {/* ////////////////////////////////////////////////////SIDEBAR MENU////////////////////////////////////////////////////////////////// */}
 
 {/* ////////////////////////////////////////////////////SIDEBAR ROUTE////////////////////////////////////////////////////////////////// */}
-      <Segment className="innerContainer" basic>
-        <Switch>
-          <Route exact path="/">
-            <Dashboard />
-          </Route>
-          <Route path="/company">
-              <CompanyNavigator />
-          </Route>
-          <Route path="/profile">
+      <Segment className="innerContainer flexCol"  basic>
+        <SupplierContext.Provider value={homepageContext}>
+          <Switch>
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
+            <Route path="/company">
+                <CompanyNavigator />
+            </Route>
+            <Route path="/profile">
+                <ProfileNavigator />
+            </Route>
+            <Route path="/supplier">
+                <SupplierNavigator />
+            </Route>
+            <Route path="/product">
+                <ProductNavigator />
+            </Route>
+            {/* <Route path="/HASFile">
+                <HASNavigator />
+            </Route> */}
+            <Route path="/HalalFile">
+                <HalalFileNavigator />
+            </Route>
+            <Route path="/certbodies">
+                <CertBodiesNavigator />
+            </Route>
+            {/* <Route path="/advisorall">
+                <AdvisorListAll />
+            </Route> */}
+            <Route path="/CArecord">
+                <ClientAdvisorRecordNavigator />
+            </Route>
+            {/* <Route path="/subcr">
+              <SubscriptionNavigator />
+            </Route> */}
+            <Route path="/advisor">
+              <AdvisorNavigator />
+            </Route>
+            {/* <Route path="/profile">
               <ProfileNavigator />
-          </Route>
-          <Route path="/supplier">
-              <SupplierNavigator />
-          </Route>
-          <Route path="/product">
-              <ProductNavigator />
-          </Route>
-          {/* <Route path="/HASFile">
-              <HASNavigator />
-          </Route> */}
-          <Route path="/HalalFile">
-              <HalalFileNavigator />
-          </Route>
-          <Route path="/certbodies">
-              <CertBodiesNavigator />
-          </Route>
-          <Route path="/advisorall">
-              <AdvisorListAll />
-          </Route>
-          <Route path="/CArecord">
-              <ClientAdvisorRecordNavigator />
-          </Route>
-          <Route path="/subcr">
-            <SubscriptionNavigator />
-          </Route>
-          <Route path="/advisor">
-            <AdvisorNavigator />
-          </Route>
-          {/* <Route path="/profile">
-            <ProfileNavigator />
-          </Route> */}
-        </Switch>
+            </Route> */}
+          </Switch>
+        </SupplierContext.Provider>
     </Segment>
 {/* ////////////////////////////////////////////////////SIDEBAR ROUTE////////////////////////////////////////////////////////////////// */}
   </div>

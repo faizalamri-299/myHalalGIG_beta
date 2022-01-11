@@ -53,3 +53,7 @@ $response = tap($kernel->handle(
 ))->send();
 
 $kernel->terminate($request, $response);
+
+// $app->bind('path.public', function() {
+//     return __DIR__;
+// });

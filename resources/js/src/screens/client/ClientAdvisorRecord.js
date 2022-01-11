@@ -96,7 +96,7 @@ const ClientAdvisorRecord = () => { //client punya advisor yang dah lulus
         
         {carecord == 0 ? 
         <Message warning>    
-          <Message.Header>Tiada Maklumat Adviosr</Message.Header>
+          <Message.Header>Tiada Maklumat Advisor</Message.Header>
           Tiada Maklumat
         </Message> :
       <RenderCompany data={carecord}/>}

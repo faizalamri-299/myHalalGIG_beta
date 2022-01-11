@@ -53,7 +53,7 @@ const SupplierDetails = () => {
   React.useEffect(() => {
 
     const bootstrapAsync = async () => {
-      if (supplier)
+    if (supplier)
     {
       getSupplierData(supplier[index].id).then(x=>{
         console.log(x);

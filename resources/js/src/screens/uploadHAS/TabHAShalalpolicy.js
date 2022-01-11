@@ -18,7 +18,8 @@ import {Switch,Route,Link,useRouteMatch} from "react-router-dom";
 
 import {UploadHASContext,
         postHASHalalpolicy,
-        deleteHASHalalpolicy} from './UploadHAS';
+        deleteHASHalalpolicy,
+        downloadHASHalalpolicy} from './UploadHAS';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -43,6 +44,10 @@ const TabHAShalalpolicy = () => {
     }).catch(e=>console.log(e))
   }
 
+  const downloadfile=(pk)=>{
+    downloadHASHalalpolicy(pk).then(console.log(pk));
+  }
+
   const deleteFile=(pk)=>{
     swal({
       title: "Adakah Anda Pasti?",
@@ -61,7 +66,7 @@ const TabHAShalalpolicy = () => {
             deleteHASHalalpolicy(pk)
             location.reload(); //if click button ok, apa dia buat
           } else {
-            location.reload();
+            //location.reload();
           }
         })
       } else {
@@ -81,7 +86,7 @@ const TabHAShalalpolicy = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.cmpnyFK+"/"+x.halalpolicy_filename} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfile(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteFile(x.id)} icon='trash alternate' />} />
         
       </Button.Group>

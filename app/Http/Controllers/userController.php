@@ -49,6 +49,46 @@ class userController extends Controller
         }
         return response()->json($usr);
     }
+
+    function getNewUser(){ //dashboard admin
+
+        $usr= DB::table('users')
+        ->leftJoin('companies','cmpnyPK','cmpnyFK')
+        ->leftJoin('roles','rolePK','roleFK')
+        ->select('users.id','name','username','lastLogin','created_at','cmpnyName')
+        ->where('roleFK',5)
+        ->OrderBy('created_at','desc')
+        ->take(5)
+        // ->groupBy('users.id')
+        ->get();
+
+        $advisor= DB::table('users')
+        ->leftJoin('companies','cmpnyPK','cmpnyFK')
+        ->leftJoin('roles','rolePK','roleFK')
+        ->select('users.id','name','username','lastLogin','created_at','cmpnyName')
+        ->where('roleFK',3)
+        ->OrderBy('created_at','desc')
+        ->take(5)
+        // ->groupBy('users.id')
+        ->get();
+
+        $totalcompany= DB::table('users')
+        ->leftJoin('companies','cmpnyPK','cmpnyFK')
+        ->leftJoin('roles','rolePK','roleFK')
+        ->select('users.id','name','username','lastLogin','created_at','cmpnyName',DB::raw('count(case when roleFK = 5 then 1 else null end) as totalUser'),DB::raw('count(case when roleFK = 3 then 1 else null end) as totalAdvisor'))
+        ->get();
+
+        $company= DB::table('companies')
+        ->select(DB::raw('count(case when cmpnyPK IS NOT NULL then 1 else null end) as totalCompany'))
+        ->get();
+
+        $supplier= DB::table('tbl_sp_supplier')
+        ->select(DB::raw('count(case when id IS NOT NULL then 1 else null end) as totalSupplier'))
+        ->get();
+
+        $returnObj = (object)['isSuccess' =>true,'usr'=>$usr,'totalcompany'=>$totalcompany,'company'=>$company,'supplier'=>$supplier,'advisor'=>$advisor];
+        return response()->json($returnObj);
+    }
     
 
     function addAdvisor(Request $request){
@@ -107,10 +147,16 @@ class userController extends Controller
         return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete"]);
     }
 
+    // function getRoles(){
+        
+    //     $role=Auth::user()->getRoleLevel();
+    //     $roles= role::where('rolelevel','>=',$role)->get();
+    //     return response()->json($roles);
+    // }
     function getRoles(){
         
         $role=Auth::user()->getRoleLevel();
-        $roles= role::where('rolelevel','>=',$role)->get();
+        $roles= role::where('rolelevel','>=',5)->get();
         return response()->json($roles);
     }
     function addUser(Request $request){

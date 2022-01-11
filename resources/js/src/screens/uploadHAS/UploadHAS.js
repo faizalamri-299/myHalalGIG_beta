@@ -15,6 +15,16 @@ export const getHASHalalpolicy = () => {
   });
 }
 
+export const downloadHASHalalpolicy = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASHalalpolicy',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASHalalpolicy=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -25,9 +35,9 @@ export const postHASHalalpolicy=(data,progress)=>{
             swal("Berjaya!", "Maklumat telah berjaya disimpan!", "success").then((result) => {
               console.log(result);
               if(result) {
-                //location.reload();
+                location.reload();
               } else {
-                //location.reload();
+                location.reload();
               }
             });
               ({ data }) => resolve(data);
@@ -63,6 +73,26 @@ export const postHASHalalpolicy=(data,progress)=>{
     axios.get('/getHASOrgchart').then(({ data }) => resolve(data))
     .catch( (error)=> {
       sessionRedirect(error)
+      reject(error);
+    });
+  });
+
+}
+// export const downloadHASOrghart = (id) => {
+//   return new Promise( (resolve, reject)=> {
+//     axios.post('/downloadHASOrghart',{ id }).then((d) => resolve(d))
+//     .catch( (error)=> {
+//       sessionRedirect(error);
+//       reject(error);
+//     });
+//   });
+// }
+
+export const downloadHASOrgchart = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASOrgchart',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
       reject(error);
     });
   });
@@ -121,6 +151,16 @@ export const getHASTor = () => {
   });
 }
 
+export const downloadHASTor = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASTor',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASTor=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -169,6 +209,16 @@ export const getHASEmpletter = () => {
     axios.get('/getHASEmpletter').then(({ data }) => resolve(data))
     .catch( (error)=> {
       sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASEmpletter = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASEmpletter',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
       reject(error);
     });
   });
@@ -227,6 +277,16 @@ export const getHASAudit = () => {
   });
 }
 
+export const downloadHASAudit = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASAudit',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASAudit=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -280,6 +340,16 @@ export const getHASHalalrisk = () => {
   });
 }
 
+export const downloadHASHalalrisk = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASHalalrisk',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASHalalrisk=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -328,6 +398,16 @@ export const getHASTraining = () => {
     axios.get('/getHASTraining').then(({ data }) => resolve(data))
     .catch( (error)=> {
       sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASTraining = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASTraining',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
       reject(error);
     });
   });
@@ -406,6 +486,16 @@ export const getHASRawMat = () => {
   });
 }
 
+export const downloadHASRawMat = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASRawMat',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASRawMat=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -462,6 +552,16 @@ export const getHASSOPRawMat = () => {
     axios.get('/getHASSOPRawMat').then(({ data }) => resolve(data))
     .catch( (error)=> {
       sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASSOPRawMat = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASSOPRawMat',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
       reject(error);
     });
   });
@@ -528,6 +628,16 @@ export const getHASTraceability = () => {
   });
 }
 
+export const downloadHASTraceability = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASTraceability',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASTraceability=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -584,6 +694,16 @@ export const getHASSOPTraceability = () => {
     axios.get('/getHASSOPTraceability').then(({ data }) => resolve(data))
     .catch( (error)=> {
       sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASSOPTraceability = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASSOPTraceability',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
       reject(error);
     });
   });
@@ -650,6 +770,16 @@ export const getHASSOPProductRecall = () => {
   });
 }
 
+export const downloadHASSOPProductRecall = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASSOPProductRecall',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASSOPProductRecall=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -706,6 +836,16 @@ export const getHASChecklist = () => {
     axios.get('/getHASChecklist').then(({ data }) => resolve(data))
     .catch( (error)=> {
       sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASChecklist = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASChecklist',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
       reject(error);
     });
   });
@@ -772,6 +912,16 @@ export const getHASLabAnalysis = () => {
   });
 }
 
+export const downloadHASLabAnalysis = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASLabAnalysis',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASLabAnalysis=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -828,6 +978,16 @@ export const getHASSertu = () => {
     axios.get('/getHASSertu').then(({ data }) => resolve(data))
     .catch( (error)=> {
       sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASSertu = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASSertu',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
       reject(error);
     });
   });
@@ -894,6 +1054,16 @@ export const getHASSOPSertu = () => {
   });
 }
 
+export const downloadHASSOPSertu = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASSOPSertu',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
 export const postHASSOPSertu=(data,progress)=>{
   return new Promise( (resolve, reject)=> {
     const config = {
@@ -943,3 +1113,198 @@ export const postHASSOPSertu=(data,progress)=>{
   });
 }
  //////////////////////////////////////////////////////////////////FILE NO 10.2 (RAW MATERIAL SOP)////////////////////////////////////////////////////////////////////////////////////
+
+ //////////////////////////////SOP General///////////////////////////
+export const getHASSOP = () => {
+  return new Promise( (resolve, reject)=> {
+    axios.get('/getHASSOP').then(({ data }) => resolve(data))
+    .catch( (error)=> {
+      sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASSOP = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASSOP',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
+export const postHASSOP=(data,progress)=>{
+  return new Promise( (resolve, reject)=> {
+    const config = {
+      onUploadProgress: progress
+  }
+    axios.post('/postHASSOP', data,config)
+          .then((data) => {
+            swal("Berjaya!", "Maklumat telah berjaya disimpan!", "success").then((result) => {
+              console.log(result);
+              if(result) {
+                location.reload();
+              } else {
+                location.reload();
+              }
+            });
+              ({ data }) => resolve(data);
+          })
+          .catch( (error)=> {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+            reject(error.response.data);
+          });
+    });
+ }
+
+ export const deleteHASSOP = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/deleteHASSOP',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////HASProductHalalCert///////////////////////////
+export const getHASProductHalalCert = () => {
+  return new Promise( (resolve, reject)=> {
+    axios.get('/getHASProductHalalCert').then(({ data }) => resolve(data))
+    .catch( (error)=> {
+      sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASProductHalalCert = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASProductHalalCert',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
+export const postHASProductHalalCert=(data,progress)=>{
+  return new Promise( (resolve, reject)=> {
+    const config = {
+      onUploadProgress: progress
+  }
+    axios.post('/postHASProductHalalCert', data,config)
+          .then((data) => {
+            swal("Berjaya!", "Maklumat telah berjaya disimpan!", "success").then((result) => {
+              console.log(result);
+              if(result) {
+                location.reload();
+              } else {
+                location.reload();
+              }
+            });
+              ({ data }) => resolve(data);
+          })
+          .catch( (error)=> {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+            reject(error.response.data);
+          });
+    });
+ }
+
+ export const deleteHASProductHalalCert = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/deleteHASProductHalalCert',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////HASOthers///////////////////////////
+export const getHASOthers = () => {
+  return new Promise( (resolve, reject)=> {
+    axios.get('/getHASOthers').then(({ data }) => resolve(data))
+    .catch( (error)=> {
+      sessionRedirect(error)
+      reject(error);
+    });
+  });
+}
+
+export const downloadHASOthers = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/downloadHASOthers',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
+export const postHASOthers=(data,progress)=>{
+  return new Promise( (resolve, reject)=> {
+    const config = {
+      onUploadProgress: progress
+  }
+    axios.post('/postHASOthers', data,config)
+          .then((data) => {
+            swal("Berjaya!", "Maklumat telah berjaya disimpan!", "success").then((result) => {
+              console.log(result);
+              if(result) {
+                location.reload();
+              } else {
+                location.reload();
+              }
+            });
+              ({ data }) => resolve(data);
+          })
+          .catch( (error)=> {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+            reject(error.response.data);
+          });
+    });
+ }
+
+ export const deleteHASOthers = (id) => {
+  return new Promise( (resolve, reject)=> {
+    axios.post('/deleteHASOthers',{ id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+//////////////////////////////////////////////////////////////////////////////////////////

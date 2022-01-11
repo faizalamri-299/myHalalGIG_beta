@@ -12,7 +12,7 @@ import {
 import * as moment from 'moment';
 import {Switch,Route,Link,useRouteMatch,useParams} from "react-router-dom";
 import swal from 'sweetalert';
-import {postMaterial,deleteRawMaterial, updateRawMaterial,getHalalCertDD, getExp, SupplierContext,postSupportDoc,deleteSupportDoc} from './Supplier';
+import {postMaterial,deleteRawMaterial, updateRawMaterial,getHalalCertDD, getExp, SupplierContext,postSupportDoc,deleteSupportDoc, downloadSuppDoc} from './Supplier';
 
 
 const TabMaterial = ({data,id,datadd}) => {
@@ -113,9 +113,9 @@ const TabMaterial = ({data,id,datadd}) => {
           console.log(result);
           if(result) {
             deleteRawMaterial(pk)
-            location.reload(); //if click button ok, apa dia buat
+            //location.reload(); //if click button ok, apa dia buat
           } else {
-            location.reload();
+            //location.reload();
           }
         })
       } else {
@@ -125,7 +125,7 @@ const TabMaterial = ({data,id,datadd}) => {
     resetForm();
   }
 
-  const deleteSupportDocument=(pk)=>{
+  const deleteSupportDocument=(pk,id)=>{
     swal({
       title: "Adakah Anda Pasti?",
       text: "Sekiranya telah dipadam, item ini tidak boleh dikembalikan semula!",
@@ -140,7 +140,7 @@ const TabMaterial = ({data,id,datadd}) => {
         }).then((result) => {
           console.log(result);
           if(result) {
-            deleteSupportDoc(pk)
+            deleteSupportDoc(pk,id)
             //location.reload(); //if click button ok, apa dia buat
           } else {
             //location.reload();
@@ -151,6 +151,10 @@ const TabMaterial = ({data,id,datadd}) => {
       }
     })
     resetForm();
+  }
+
+  const downloadfile=(pk,id)=>{
+    downloadSuppDoc(pk,id).then(console.log(pk,id));
   }
 
   const addSupportDocForm=({id,rmsd_name})=>{
@@ -183,11 +187,10 @@ const TabMaterial = ({data,id,datadd}) => {
       <>
         <Table.Row key={i}>
           <Table.Cell>{x.rmsd_name}</Table.Cell>
-          
           <Table.Cell>
           <Button.Group basic floated='right' size='small'>
-            <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/support_doc/raw_mat/"+x.fk_rmsd_raw_mat_id+"/"+x.rmsd_name} target="_blank"  icon='download' />} />
-            <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteSupportDocument(x.rmsd_name)} icon='trash alternate' />} /> 
+            <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfile(x.rmsd_name,x.fk_rmsd_raw_mat_id)} target="_blank"  icon='download' />} />
+            <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteSupportDocument(x.rmsd_name,x.fk_rmsd_raw_mat_id)} icon='trash alternate' />} /> 
           </Button.Group>
           </Table.Cell>
         </Table.Row>
@@ -380,12 +383,6 @@ const TabMaterial = ({data,id,datadd}) => {
               value={sprm_fk_id_halal_cert}
               options={ddcert}
             />
-
-            <Checkbox 
-              slider 
-              label='Mempunyai dokumen sokongan?' 
-              onChange={() => {setFormOpen(false);}} 
-            /><span>&emsp;&ensp;</span>
             
             <Checkbox 
               slider 
@@ -394,17 +391,6 @@ const TabMaterial = ({data,id,datadd}) => {
             />
             <Form.Group widths='equal'>
             </Form.Group>
-
-          <div hidden={showForm ? true : false}>
-          <Form.Group id='formgroup1'widths='equal'>
-            <Form.Input
-                fluid
-                label='Dokumen Sokongan'
-                type="file"
-                onChange={e=>setDoc(e.target.files[0])}
-              /> 
-            </Form.Group> 
-          </div>
 
           <div hidden={showForm1 ? true : false}>
           <Form.Group id='formgroup1'widths='equal'>

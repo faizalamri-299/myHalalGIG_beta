@@ -22,7 +22,10 @@ import {UploadHASContext,
         postHASSOPProductRecall,
         deleteHASTraceability,
         deleteHASSOPTraceability,
-        deleteHASSOPProductRecall} from './UploadHAS';
+        deleteHASSOPProductRecall,
+        downloadHASTraceability,
+        downloadHASSOPTraceability,
+        downloadHASSOPProductRecall} from './UploadHAS';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -71,6 +74,18 @@ const TabTraceability = () => {
     postHASSOPProductRecall(formData).then(x=>{
       console.log(x)
     }).catch(e=>console.log(e))
+  }
+
+  const downloadfile=(pk)=>{
+    downloadHASTraceability(pk).then(console.log(pk));
+  }
+
+  const downloadfileSOP=(pk)=>{
+    downloadHASSOPTraceability(pk).then(console.log(pk));
+  }
+
+  const downloadfileSOPPR=(pk)=>{
+    downloadHASSOPProductRecall(pk).then(console.log(pk));
   }
 
   const deleteTraceability=(pk)=>{
@@ -166,7 +181,7 @@ const TabTraceability = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.ht_fk_company_id+"/"+x.ht_file_name} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfile(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteTraceability(x.id)} icon='trash alternate' />} />
         
       </Button.Group>
@@ -203,7 +218,7 @@ const TabTraceability = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.hst_fk_company_id+"/"+x.hst_file_name} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfileSOP(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteSOPTraceability(x.id)} icon='trash alternate' />} />
         
       </Button.Group>
@@ -240,7 +255,7 @@ const TabTraceability = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.hpr_fk_company_id+"/SOP_product_recall/"+x.hpr_file_name} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfileSOPPR(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteSOPProductRecall(x.id)} icon='trash alternate' />} />
         
       </Button.Group>

@@ -86,9 +86,9 @@ export const postSupplier = (data) => {
     swal("Berjaya!", "Maklumat Pembekal telah berjaya disimpan!", "success").then((result) => {
       console.log(result);
       if(result) {
-       // location.reload(); //if click button ok, apa dia buat
+        location.reload(); //if click button ok, apa dia buat
       } else {
-        //location.reload();
+        location.reload();
       }
     }) //contoh untuk display error and success message
   )
@@ -139,9 +139,9 @@ export const postSupportDoc = (data) => {
     swal("Berjaya!", "Dokumen Sokongan telah berjaya disimpan!", "success").then((result) => {
       console.log(result);
       if(result) {
-        //location.reload(); //if click button ok, apa dia buat
+        location.reload(); //if click button ok, apa dia buat
       } else {
-        //location.reload();
+        location.reload();
       }
     }) //contoh untuk display error and success message
   )
@@ -172,9 +172,19 @@ export const updateSupportDoc= (data) => {
   });
 }
 
-export const deleteSupportDoc=x=>{
+export const downloadSuppDoc = (pk,id) => {
   return new Promise( (resolve, reject)=> {
-    axios.post('/deletesupportdoc',{ pk: x }).then((d) => resolve(d))
+    axios.post('/downloadmaterialsuppdoc',{ pk: pk, id:id }).then((d) => resolve(d))
+    .catch( (error)=> {
+      sessionRedirect(error);
+      reject(error);
+    });
+  });
+}
+
+export const deleteSupportDoc=(pk,id)=>{
+  return new Promise( (resolve, reject)=> {
+    axios.post('/deletesupportdoc',{ pk: pk, id:id }).then((d) => resolve(d))
     .catch( (error)=> {
       sessionRedirect(error)
       reject(error)
@@ -193,9 +203,9 @@ export const postSupplierCert= (data) => {
       swal("Berjaya!", "Maklumat Sijil Halal telah berjaya disimpan!", "success").then((result) => {
         console.log(result);
         if(result) {
-         // location.reload(); //if click button ok, apa dia buat
+         location.reload(); //if click button ok, apa dia buat
         } else {
-          //location.reload();
+         location.reload();
         }
       }); //contoh untuk display error and success message
         ({ data }) => resolve(data);
@@ -245,9 +255,9 @@ export const postMaterial= (data) => {
       swal("Berjaya!", "Maklumat Bahan Mentah telah berjaya disimpan!", "success").then((result) => {
         console.log(result);
         if(result) {
-          //location.reload(); //if click button ok, apa dia buat
+          location.reload(); //if click button ok, apa dia buat
         } else {
-          //location.reload();
+          location.reload();
         }
       }); //contoh untuk display error and success message
         ({ data }) => resolve(data);

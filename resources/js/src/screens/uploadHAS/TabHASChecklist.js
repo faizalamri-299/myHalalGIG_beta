@@ -18,7 +18,8 @@ import {Switch,Route,Link,useRouteMatch} from "react-router-dom";
 
 import {UploadHASContext,
         postHASChecklist,
-        deleteHASChecklist} from './UploadHAS';
+        deleteHASChecklist,
+        downloadHASChecklist} from './UploadHAS';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -41,6 +42,10 @@ const TabRawMaterial = () => {
     postHASChecklist(formData).then(x=>{
       console.log(x)
     }).catch(e=>console.log(e))
+  }
+
+  const downloadfile=(pk)=>{
+    downloadHASChecklist(pk).then(console.log(pk));
   }
 
   const deleteChecklist=(pk)=>{
@@ -83,7 +88,7 @@ const TabRawMaterial = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.hc_fk_company_id+"/"+x.hc_file_name} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfile(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteChecklist(x.id)} icon='trash alternate' />} />
         
       </Button.Group>

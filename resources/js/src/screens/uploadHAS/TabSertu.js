@@ -20,7 +20,9 @@ import {UploadHASContext,
         postHASSertu,
         postHASSOPSertu,
         deleteHASSertu,
-        deleteHASSOPSertu} from './UploadHAS';
+        deleteHASSOPSertu,
+        downloadHASSertu,
+        downloadHASSOPSertu} from './UploadHAS';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -56,6 +58,14 @@ const TabSertu = () => {
     postHASSOPSertu(formData).then(x=>{
       console.log(x)
     }).catch(e=>console.log(e))
+  }
+
+  const downloadfile=(pk)=>{
+    downloadHASSertu(pk).then(console.log(pk));
+  }
+
+  const downloadfileSOP=(pk)=>{
+    downloadHASSOPSertu(pk).then(console.log(pk));
   }
 
   const deleteSertu=(pk)=>{
@@ -124,7 +134,7 @@ const TabSertu = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.hs_fk_company_id+"/"+x.hs_file_name} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfile(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteSertu(x.id)} icon='trash alternate' />} />
         
       </Button.Group>
@@ -160,7 +170,7 @@ const TabSertu = () => {
      <Table.Cell>{moment(x.date).format('DD/MM/YYYY hh:mm:ss')}</Table.Cell>
      <Table.Cell>
      <Button.Group basic floated='right' size='small'>
-      <Popup content='Muat Turun Fail'position='top center' trigger={<Button href={"/files/HASFILE/"+x.hss_fk_company_id+"/"+x.hss_file_name} target="_blank"  icon='download' />} />
+      <Popup content='Muat Turun Fail'position='top center' trigger={<Button onClick={()=>downloadfileSOP(x.id)} target="_blank"  icon='download' />} />
       <Popup content='Padam Fail' position='top center'  trigger={<Button onClick={()=>deleteSOPSertu(x.id)} icon='trash alternate' />} />
         
       </Button.Group>

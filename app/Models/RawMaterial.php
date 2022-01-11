@@ -12,18 +12,9 @@ class RawMaterial extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    public function getCert()
+    public function supportdoc()
     {
-        $data=$this->hasOne('App\Models\SupplierCert', 'id','sprm_fk_id_halal_cert_2')->first();
-        // if(!is_null($data))
-        // {
-        //     $cert = $data->sprm_fk_id_halal_cert;
-        //     $data = $data->sprm_fk_id_halal_cert_2 + $cert;
-        // }
-        // else{
-        //     $data = $data->sprm_fk_id_halal_cert;
-        // }
-        return $data;
+        return $this->hasMany('App\Models\RawMatSuppDoc', 'fk_rmsd_raw_mat_id','id');
     }
 }
 

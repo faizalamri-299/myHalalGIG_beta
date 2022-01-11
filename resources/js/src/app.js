@@ -9,6 +9,7 @@ import {
 import { AuthContext,logout,checkSession,getCustomLogin } from './screens/auth/auth';
 import FlashScreen from './screens/FlashScreen';
 import SignInScreen from './screens/auth/SignInScreen';
+import LandingPage from './screens/landingpage/home';
 import CustomSignInScreen from './screens/auth/CustomSignInScreen';
 import RegisterScreen from './screens/auth/RegisterScreen';
 import RegisterScreenAdvisor from './screens/auth/RegisterScreenAdvisor';
@@ -17,6 +18,8 @@ import AdvisorRegisterScreen from './screens/auth/AdvisorRegisterScreen';
 import HomeNavigator from './navigations/HomeNavigator';
 import ClientNavigator from './navigations/ClientNavigator';
 import AdvisorHomeNavigator from './navigations/AdvisorHomeNavigator';
+import AuditorNavigator from './navigations/AuditorNavigator.js';
+import ClientSubscription from './screens/client/ClientSubcription';
 
 export default function App(props) {
     const [state, dispatch] = React.useReducer(
@@ -172,8 +175,11 @@ export default function App(props) {
                     <Route path="/registeradvisor">
                         <RegisterScreenAdvisor />
                     </Route>
-                    <Route path="/">
+                    <Route path="/login">
                         <SignInScreen />
+                    </Route>
+                    <Route path="/">
+                        <LandingPage />
                     </Route>
                 </Switch>
             ) :
@@ -185,7 +191,9 @@ export default function App(props) {
             <HomeNavigator /> :
             state.accessType > 1 && state.accessType < 4 ? 
             <AdvisorHomeNavigator/> : 
-            <ClientNavigator/>
+            state.accessType > 3 && state.accessType < 6 ?
+            <ClientNavigator/> :
+            <AuditorNavigator/>
             }
 
         </AuthContext.Provider>

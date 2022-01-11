@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use File;
+use Imagick;
+use ZipArchive;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\supplier;
 use App\Models\RawMaterial;
@@ -12,8 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use DB;
+
 
 class SupplierController extends Controller
 {
@@ -40,17 +44,17 @@ class SupplierController extends Controller
         return response()->json($SupplierCert);
     }
 
-    public function getCertExp() 
+    public function getCertExp() //check expired date cb raw material
     {
         
         $SupplierCert= DB::table('tbl_spcb_supplier_has_cert_bodies')
         ->Leftjoin('tbl_sp_supplier', 'tbl_spcb_supplier_has_cert_bodies.spcb_fk_supplier_id', '=', 'tbl_sp_supplier.id')//join table cert bodies
         ->select('tbl_sp_supplier.sp_name','spcb_fk_supplier_id','spcb_cert_bodies','spcb_date_cert',DB::raw("DATEDIFF(spcb_date_cert,now()) as days_left"))
-        ->orderBy('spcb_cert_bodies','desc')
         ->where([
             ['spcb_date_cert', '>', Carbon::now()],
             ['spcb_date_cert', '<', Carbon::now()->addMonth(6)],
         ])
+        ->orderBy('days_left','asc')
         ->get();
         return response()->json($SupplierCert); 
     }
@@ -65,8 +69,9 @@ class SupplierController extends Controller
     {
         $rawmaterial= DB::table('tbl_sprm_supplier_has_raw_mat')
         ->Leftjoin('tbl_sp_supplier', 'tbl_sprm_supplier_has_raw_mat.sprm_fk_supplier_id', '=', 'tbl_sp_supplier.id')//join table cert bodies
-        ->select('tbl_sprm_supplier_has_raw_mat.id',DB::raw('CONCAT("(",tbl_sp_supplier.sp_name,") - ",tbl_sprm_supplier_has_raw_mat.sprm_name) AS supplierwithrawmat'))
+        ->select('tbl_sprm_supplier_has_raw_mat.id',DB::raw('CONCAT("(",tbl_sp_supplier.sp_name,") - ",tbl_sprm_supplier_has_raw_mat.sprm_name) AS supplierwithrawmat','tbl_sp_supplier.sp_name'))
         ->where('tbl_sp_supplier.sp_status','=','0')
+        ->orderBy('supplierwithrawmat', 'asc')
         ->get();
         return response()->json($rawmaterial);
     }
@@ -136,15 +141,42 @@ class SupplierController extends Controller
     }
 
     public function createSupportDoc(Request $request)
-    {  
-        $crs=$request->id;
+    {   
+        // $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        // $ENcmpnyPK=dechex($cmpnyPK);
+        // $cmpnyName=Auth::user()->getCompany()->cmpnyName;
+        // $crs=$request->sprm_fk_supplier_id;
+
+        // $fileName = storage_path('app/support_doc/'.$crs);
+
+        // $zip = new ZipArchive;
+        // if($zip->open($fileName,ZipArchive::CREATE) === TRUE)
+        // {
+        //     $file      = $request->file('rmsd_name');
+        //     $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension(); 
+        //     $dir="$ENcmpnyPK/HASFILE";
+        //     $zip->addFile($file, $fileName);
+        //     $path = Storage::putFileAs($dir, $file, $fileName);
+        //     $suppdoc = new RawMatSuppDoc;
+        //     $suppdoc->fk_rmsd_raw_mat_id = $request->sprm_fk_supplier_id;
+        //     $suppdoc->rmsd_name = $fileName;
+        //     $suppdoc->save();
+        //     $objdata = (object)['fileDir'=>$path,'suppdoc'=>$suppdoc];
+
+        //     $zip->close();
+        //     return response()->json($objdata);
+        // }
+
+        $cmpnyPK=Auth::user()->getCompany()->cmpnyPK;
+        $ENcmpnyPK=dechex($cmpnyPK);
+        $crs=$request->sprm_fk_supplier_id;
+        
         if ($request->hasFile('rmsd_name')) {
             $file      = $request->file('rmsd_name');
             $fileName   = pathinfo($file->getClientOriginalName())['filename'].'_'.uniqid() . '.' . $file->getClientOriginalExtension();
 
-        
-            $dir="support_doc/$crs/raw_mat/$request->sprm_fk_supplier_id/$request->id";
-            $path = Storage::disk('public_uploads')->putFileAs($dir, $file, $fileName);
+            $dir="support_doc/$crs";
+            $path = Storage::putFileAs($dir, $file, $fileName);
 
             $suppdoc = new RawMatSuppDoc;
             $suppdoc->fk_rmsd_raw_mat_id = $request->sprm_fk_supplier_id;
@@ -155,6 +187,29 @@ class SupplierController extends Controller
         return response()->json($objdata);
         }
     }
+
+    public function downloadSupportDoc(Request $request)
+    {
+        $supportdoc = RawMatSuppDoc::where('id',$request->pk)->value('rmsd_name');
+        $id = $request->id;
+        $file_path = storage_path("app/support_doc/$id/$request->pk");
+            
+        return response()->download($file_path);  
+    }
+
+    public function pdfimg()
+    {
+        $imagick = new Imagick();
+  
+        $imagick->readImage('C:\xampp\htdocs\myhalalgig\public\dummy.pdf');
+  
+        $saveImagePath = public_path('my-image.jpg');
+        $imagick->writeImages($saveImagePath, true);
+  
+        return response()->file($saveImagePath);
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -251,6 +306,17 @@ class SupplierController extends Controller
     public function destroy(Request $request)
     {
         $supplier = supplier::where('id',$request->pk)->firstOrFail();
+        $rawmaterial = RawMaterial::where('sprm_fk_supplier_id',$request->pk)->first();
+        $rawmaterial->supportdoc()->delete();
+
+        $file_path = storage_path("app/support_doc/$request->pk");
+        if(File::exists($file_path)) {
+            File::deleteDirectory(($directory));
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
+        }
+
+        $supplier->certbodies()->delete();
+        $supplier->raw_material()->delete();
         $supplier->delete();
         return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete"]);
     }
@@ -263,14 +329,30 @@ class SupplierController extends Controller
 
     public function deleteRawMat(Request $request){
         $rawmaterial = RawMaterial::where('id',$request->id)->first();
+        $rawmaterial->supportdoc()->delete();
         $rawmaterial->delete();
+
+        $file_path = storage_path("app/support_doc/$request->id");
+        if(File::exists($file_path)) {
+            File::deleteDirectory(($file_path));
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
+        }
         return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete"]);
+       
     }
 
     public function deleteSupportDoc(Request $request){
+        $itemid=$request->sprm_fk_supplier_id;
         $supportdoc = RawMatSuppDoc::where('rmsd_name',$request->pk)->first();
+        
         $supportdoc->delete();
-        return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete"]);
+        $file_path = storage_path("app/support_doc/$request->id/$request->pk");
+        if(File::exists($file_path)) {
+            File::delete($file_path);
+            $file_path->delete();
+            return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
+        }
+        return response()->json(['isSuccess' =>true,'message'=>"Successfull Delete",'file_path'=>$file_path]);
     }
 
     function encodeMaster( $obj ) 

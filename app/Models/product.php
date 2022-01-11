@@ -12,5 +12,9 @@ class product extends Model
     protected $table = 'tbl_pr_product';
     public $timestamps = false;
 
+    public function productdetail()
+    {
+        return $this->hasMany('App\Models\productdetail', 'prsp_fk_product_id','id');
+    }
     
 }

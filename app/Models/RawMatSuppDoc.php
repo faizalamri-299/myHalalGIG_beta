@@ -11,4 +11,9 @@ class RawMatSuppDoc extends Model
     use HasFactory;
     protected $primaryKey = 'id';
     public $timestamps = false;
+
+    public function supportdoc()
+    {
+        $data=$this->hasMany('App\Models\RawMatSuppDoc', 'fk_rmsd_raw_mat_id','id')->first();
+    }
 }

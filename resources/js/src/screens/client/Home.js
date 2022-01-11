@@ -19,10 +19,7 @@ import swal from 'sweetalert';
 import { ToastContainer, toast } from 'react-toastify';
 import {SupplierContext} from '../supplier/Supplier';
 import 'react-toastify/dist/ReactToastify.css';
-/* Heads up!
- * HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled
- * components for such things.
- */
+import * as moment from 'moment';
 
 export const getExp = () => {
   return new Promise( (resolve, reject)=> {
@@ -43,18 +40,18 @@ const Home = () => {
   const data = props.data;
   const listItems = data.map((x) =>
   <>
-  {x.days_left < 100 ? 
+  {x.days_left < 120 ? 
     <Table.Row className="row-error">
       <Table.Cell>{x.sp_name}</Table.Cell>
       <Table.Cell>{x.spcb_cert_bodies == null ? "Tiada": x.spcb_cert_bodies}</Table.Cell>
-      <Table.Cell>{x.spcb_date_cert == null ? "Tiada": x.spcb_date_cert}</Table.Cell>
+      <Table.Cell>{x.spcb_date_cert == null ? "Tiada": moment(x.spcb_date_cert).format('DD/MM/YYYY')}</Table.Cell>
       <Table.Cell>{x.days_left} days left</Table.Cell>
     </Table.Row>
     :
     <Table.Row className="row-warning">
       <Table.Cell >{x.sp_name}</Table.Cell>
       <Table.Cell>{x.spcb_cert_bodies == null ? "Tiada": x.spcb_cert_bodies}</Table.Cell>
-      <Table.Cell>{x.spcb_date_cert == null ? "Tiada": x.spcb_date_cert}</Table.Cell>
+      <Table.Cell>{x.spcb_date_cert == null ? "Tiada": moment(x.spcb_date_cert).format('DD/MM/YYYY')}</Table.Cell>
       <Table.Cell>{x.days_left} days left</Table.Cell>
     </Table.Row> 
   } 
@@ -118,7 +115,7 @@ return (
         </Grid>
       </Container>
     </Segment>    
-  </>
+</>
   )
   
 }

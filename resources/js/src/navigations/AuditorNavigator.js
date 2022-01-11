@@ -16,7 +16,13 @@ import logo from '../assets/img/initialWhite.png';
 import {AuthContext} from '../screens/auth/auth';
 import Home from '../screens/auditor/Home';
 import AuditorPremises from '../screens/auditor/AuditorPremises';
-import {getData,AuditorContext} from '../screens/auditor/auditor';
+
+import UserList from '../screens/auditor/userList';
+
+import ClientUser from '../screens/auditor/ClientUser';
+import {getData,ClientContext} from '../screens/client/client';
+
+import {getalluser,AuditorContext} from '../screens/auditor/auditor';
 import {isMobile} from 'react-device-detect';
 
 
@@ -27,6 +33,8 @@ const AuditorNavigator = () => {
     const [premises, setpremises] = React.useState([]);
     const [schmlist, setschmlist] = React.useState([]);
     const [sideBarOpen, openSidebar] = React.useState(false);
+    const [users, setusers] = React.useState([]);
+
     
     
     let { path, url } = useRouteMatch();
@@ -34,11 +42,22 @@ const AuditorNavigator = () => {
       openSidebar(false);
     }
     const bootstrapAsync = async () => {
-      getData().then(x=>{
-        setsubcrData(x.subscription);
-        setpremises(x.premises);
-        setschmlist(x.cklists);
-      }).catch(e=>console.log(e))
+      getalluser().then(x => {
+        setusers(x);
+      })
+      // getsubuserdata().then(x=>{
+      //   setsubcrData(x.subscription);
+      //   setpremises(x.premises);
+      //   setschmlist(x.cklists);
+      //   setusers(x.users);
+      // getData().then(x=>{
+      //   setsubcrData(x.data);
+      //   // setusers(x.users);
+      //   setpremises(x.premises);
+      //   setschmlist(x.schmlist);
+      //   setactive_subcr(x.active_subcr);
+      //   setloading(false);
+      // }).catch(e=>console.log(e));
     };
 
   React.useEffect(() => {
@@ -48,14 +67,38 @@ const AuditorNavigator = () => {
   }, []);
 
   const auditorContext = React.useMemo(
-    () => ({subcrData,premises,schmlist,
+    () => ({subcrData,premises,schmlist,users,
+      reloadUser:setusers,
     reloadData:bootstrapAsync,
     clearDraft:()=>{localStorage.removeItem(cmpny.cmpnyPK + "_cklistDraft"); setDraft(null);}
     }),
-    [subcrData,premises,schmlist]
+    [subcrData,premises,schmlist,users]
 );
 
+const updateUser=(x,type)=>{
+  if(users){
+  // ]
+ 
+ delete x.password;
+ let currentuser = JSON.parse(JSON.stringify(users));
 
+   let index=currentuser.findIndex(obj => {return obj.id === x.id});
+   if(index<0){
+     currentuser.push(x);
+   }
+   else{
+     if(type==="delete")currentuser.splice(index, 1)
+     else currentuser[index]=x;
+   }
+   setusers(currentuser);
+
+ }
+ else{
+   setusers([x]);
+  
+ }
+ 
+}
 
 
   return (
@@ -118,32 +161,35 @@ const AuditorNavigator = () => {
        </Menu.Item>
 
        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem(''))}
-         name='home'
+        icon= 'building'
+         name='Profil Syarikat'
          to="/"
          active={activeItem === ''}
        />
         <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('premises'))}
-         name='Premises'
+        icon= 'industry'
+         name='Premis 𝘭 Site 𝘭 Plan'
          to="/premises"
          active={activeItem === 'premises'}
        />
        
-       <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('cklist'))}
+       {/* <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('cklist'))}
          name='Checklists'
          to="/checklist"
          active={activeItem === 'cklist'}
-       />
-       {/*
-       <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('subcr'))}
+       /> */}
+       
+       {/* <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('subcr'))}
          name='Subscription Group'
          to="/subscription"
          active={activeItem === 'subcr'}
-       />
+       /> */}
        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('user'))}
-         name='Users'
+         icon= 'users'
+         name='Senarai Pengguna'
          to="/users"
          active={activeItem === 'user'}
-       /> */}
+       />
        <Menu.Item onClick={()=>sidebarClick(signOut())} attached="bottom"
          name='Logout'
        />
@@ -162,34 +208,37 @@ const AuditorNavigator = () => {
         </Menu.Item>
 
         <Menu.Item as={Link} onClick={()=>setactiveItem('')}
-          name='home'
+         icon= 'building'
+          name='Profil Syarikat'
           to="/"
           active={activeItem === ''}
         />
 
          <Menu.Item as={Link} onClick={()=>setactiveItem('premises')}
-          name='Premises'
+         icon= 'industry'
+          name='Premis 𝘭 Site 𝘭 Plan'
           to="/premises"
           active={activeItem === 'premises'}
         />
         
-        <Menu.Item as={Link} onClick={()=>setactiveItem('cklist')}
+        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('cklist')}
           name='Checklists'
           to="/checklist"
           active={activeItem === 'cklist'}
-        />
+        /> */}
         
-        {/*
-        <Menu.Item as={Link} onClick={()=>setactiveItem('subcr')}
+        
+        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('subcr')}
           name='Subscription Group'
           to="/subscription"
           active={activeItem === 'subcr'}
-        />
+        /> */}
         <Menu.Item as={Link} onClick={()=>setactiveItem('user')}
-          name='Users'
+          icon= 'users'
+          name='Senarai Pengguna'
           to="/users"
           active={activeItem === 'user'}
-        /> */}
+        />
       </Menu>
       }
       <AuditorContext.Provider value={auditorContext}>
@@ -200,6 +249,9 @@ const AuditorNavigator = () => {
                     </Route>
                     <Route path="/premises">
                         <AuditorPremises data={premises}  />
+                    </Route>
+                    <Route path="/users" onDataChange={updateUser} data={users} id={cmpny.cmpnyPK}>
+                    <UserList/>
                     </Route>
                 </Switch>
             </Segment>

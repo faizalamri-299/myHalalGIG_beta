@@ -46,10 +46,9 @@ const CompanyNavigator = () => {
                     <Route exact path={path}>
                         <CompanyList />
                     </Route>
-                    {/* <Route path={`${path}/details/:index`}>
+                    <Route path={`${path}/details/:index`}>
                         <CompanyDetails />
-                    </Route> */}
-                    
+                    </Route>    
                 </Switch>
               </CompanyContext.Provider>
   )

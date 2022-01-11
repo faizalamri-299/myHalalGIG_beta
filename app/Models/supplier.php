@@ -13,12 +13,19 @@ class supplier extends Model
     public $timestamps = false;
 
 
-    public function getRawMaterial()
+    public function certbodies()
     {
-        $data=$this->hasOne('App\Models\RawMaterial', 'id','sprm_fk_supplier_id')->first();
-        $data->id=encrypt($data->id);
-        return $data;
-        
+        return $this->hasMany('App\Models\SupplierCert','spcb_fk_supplier_id','id');
+    }
+
+    public function raw_material()
+    {
+        return $this->hasMany('App\Models\RawMaterial','sprm_fk_supplier_id','id');
+    }
+
+    public function raw_material_support_doc()
+    {
+        return $this->hasMany('App\Models\RawMaterial','sprm_fk_supplier_id','id');
     }
 
 }

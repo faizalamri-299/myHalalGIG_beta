@@ -29,28 +29,6 @@ const CompanyAdvisorDetails = () => {
   console.log('asdas',companyadvisor)
   const { index } = useParams();
 
-  // React.useEffect(() => {
-
-  //   const bootstrapAsync = async () => {
-  //     if (companyadvisor)
-  // {
-  //   getCompanyAdvisorRM(companyadvisor[index].ad_fk_company_id).then(x=>{
-  //       console.log(x);
-  //       if(typeof x.data!=="undefined") setData(x.data);
-
-  //       if(typeof x.companyadvisordetail!=="undefined") 
-  //       {
-  //         setcompanyadvisordetail(x.companyadvisordetail);
-  //         //setRawMaterial(x.rawmaterial);
-  //       }
-        
-  //     }).catch(e=>{
-  //         console.log(e)
-  //       });
-  //     }
-  // };
-  //     bootstrapAsync();
-  //   }, [companyadvisor]);
 
     const RenderCompany = props => {
       const data = props.data;
@@ -278,7 +256,7 @@ const CompanyAdvisorDetails = () => {
             <Grid.Column width={3}>
               <Card style={{ marginTop: '0.1em'}}>
                 <div style={{ margin: '1em 1em 1em 1em'}}>
-                  <Image src={detail.cmpnyConfig.headerLogo} wrapped/>
+                  {/* <Image src={detail.cmpnyConfig.headerLogo} wrapped/> */}
                 </div>
                 <Card.Content>
                   <Card.Header textAlign='center'>HAS FILE : {detail.cmpnyName}</Card.Header>

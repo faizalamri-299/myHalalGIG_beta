@@ -5,7 +5,7 @@ import { Input, Menu, Segment ,Dropdown,
     Header,
     Icon,
     Image,
-    Sidebar, Dimmer, Loader,Table
+    Sidebar, Divider, Loader,Table
     
 } from 'semantic-ui-react';
 
@@ -40,6 +40,7 @@ import SupplierNavigator from './SupplierNavigator';
 import ProductNavigator from './ProductNavigator';
 import HalalFileNavigator from './HalalNavigator';
 import HASFileNavigator from './HASNavigator';
+import UploadHalalNavigator from './UploadHalalNavigator';
 import UploadHASNavigator from './UploadHASNavigator';
 import ClientSelectedNavigator from './ClientSelectedNavigator';
 import swal from '@sweetalert/with-react'
@@ -128,38 +129,6 @@ const ClientNavigator = () => {
     [subcrData,users,premises,inhalalcom,training,schmlist,activeDraft,active_subcr,advisorclient,expDate]
 );
 
-
-const notify = () => {
-  swal(
-  <Table basic>
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell>Name</Table.HeaderCell>
-        <Table.HeaderCell>Status</Table.HeaderCell>
-        <Table.HeaderCell>Notes</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-
-    <Table.Body>
-      <Table.Row>
-        <Table.Cell>John</Table.Cell>
-        <Table.Cell>Approved</Table.Cell>
-        <Table.Cell>None</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Jamie</Table.Cell>
-        <Table.Cell>Approved</Table.Cell>
-        <Table.Cell>Requires call</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Jill</Table.Cell>
-        <Table.Cell>Denied</Table.Cell>
-        <Table.Cell>None</Table.Cell>
-      </Table.Row>
-    </Table.Body>
-  </Table>
-  );
-};
 
 const updateUser=(x,type)=>{
   if(users){
@@ -265,10 +234,11 @@ const updateCklist =(x)=>{
           </Menu.Item> */}
         </Menu.Menu>
       </Menu>
-      
-   <div  style={{display:'flex', flexDirection:'row',flex:1, overflow:'hidden' }}>
+
+
+    <div style={{display:'flex', flexDirection:'row',flex:1, overflow:'auto' }}>
    
-   {isMobile?
+    {isMobile?
         <Sidebar
           as={Menu}
           animation="push"
@@ -302,19 +272,11 @@ const updateCklist =(x)=>{
         />
        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('premises'))}
          name='Premises'
+         icon= 'warehouse'
          to="/premises"
          active={activeItem === 'premises'}
        />
-       {/* <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('inhalalcom'))}
-         name='Internal Halal Committee'
-         to="/inhalalcom"
-         active={activeItem === 'inhalalcom'}
-       />
-       <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('training'))}
-         name='Halal Training'
-         to="/training"
-         active={activeItem === 'training'}
-       /> */}
+
        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('supplier'))}
           icon= 'truck'
           name='Pembekal'
@@ -327,27 +289,48 @@ const updateCklist =(x)=>{
           to="/product"
           active={activeItem === 'product'}
         />
-      <div className="ui divider"></div>
-        <Menu.Item header>Dokumen</Menu.Item>
-        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('HASFile')}
-          icon= 'file alternate outline'
-          name='Fail HAS'
+        <Divider horizontal><Header as='h6' color='violet'>TEMPLAT</Header></Divider>
+        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('HASFile'))}
+          icon= 'file alternate'
+          name='Fail HALAL'
           to="/HASFile"
           active={activeItem === 'HASFile'}
-        /> */}
-  
-        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('HalalFile'))}
+        />
+        <Menu.Item as={Link} onClick={()=>setactiveItem('HalalFile')}
           icon= 'file archive'
-          name='Templat Fail HAS'
+          name='Fail HAS'
           to="/HalalFile"
           active={activeItem === 'HalalFile'}
         />
+        <Divider horizontal><Header as='h6' color='violet'>MUAT NAIK</Header></Divider>
+        <Menu.Item as={Link} onClick={()=>setactiveItem('UploadHalal')}
+          icon= 'file alternate outline'
+          name='Fail HALAL'
+          to="/UploadHalal"
+          active={activeItem === 'UploadHalal'}
+        />
+        <Menu.Item as={Link} onClick={()=>setactiveItem('UploadHAS')}
+          icon= 'file archive outline'
+          name='Fail HAS'
+          to="/UploadHAS"
+          active={activeItem === 'UploadHAS'}
+        />
+      <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisor')}
+        icon= 'file archive'
+        name='Pilih Advisor'
+        to="/ClientAdvisor"
+        active={activeItem === 'ClientAdvisor'}
+      />
+      <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisorList')}
+        icon= 'file archive'
+        name='Advisor'
+        to="/ClientAdvisorList"
+        active={activeItem === 'ClientAdvisorList'}
+      />
       
        <Menu.Item onClick={()=>sidebarClick(signOut())} attached="bottom"
          name='Log Keluar'
        />
-
-       
        </Sidebar>
    :
    <Menu pointing secondary vertical>
@@ -379,18 +362,6 @@ const updateCklist =(x)=>{
           to="/premises"
           active={activeItem === 'premises'}
         />
-        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('inhalalcom')}
-          icon= 'users'
-          name='Jawatankuasa Halal Dalaman'
-          to="/inhalalcom"
-          active={activeItem === 'inhalalcom'}
-        />
-        <Menu.Item as={Link} onClick={()=>setactiveItem('training')}
-          icon= 'certificate'
-          name='Latihan Halal'
-          to="/training"
-          active={activeItem === 'training'}
-        /> */}
         <Menu.Item as={Link} onClick={()=>setactiveItem('supplier')}
           icon= 'truck'
           name='Pembekal'
@@ -405,27 +376,29 @@ const updateCklist =(x)=>{
         />
       <div className="ui divider"></div>
         <Menu.Item header>Dokumen</Menu.Item>
-        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('HASFile')}
-          icon= 'file alternate outline'
-          name='Fail HAS'
-          to="/HASFile"
-          active={activeItem === 'HASFile'}
-        /> */}
+        <Divider horizontal><Header as='h6'>TEMPLAT</Header></Divider>
         <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('HASFile'))}
-          icon= 'file archive'
-          name='Templat Fail HALAL'
+          icon= 'file alternate'
+          name='Fail HALAL'
           to="/HASFile"
           active={activeItem === 'HASFile'}
         />
         <Menu.Item as={Link} onClick={()=>setactiveItem('HalalFile')}
           icon= 'file archive'
-          name='Templat Fail HAS'
+          name='Fail HAS'
           to="/HalalFile"
           active={activeItem === 'HalalFile'}
         />
+        <Divider horizontal><Header as='h6'>MUAT NAIK</Header></Divider>
+        <Menu.Item as={Link} onClick={()=>setactiveItem('UploadHalal')}
+          icon= 'file alternate outline'
+          name='Fail HALAL'
+          to="/UploadHalal"
+          active={activeItem === 'UploadHalal'}
+        />
         <Menu.Item as={Link} onClick={()=>setactiveItem('UploadHAS')}
-          icon= 'file archive'
-          name='Muat naik Fail HAS'
+          icon= 'file archive outline'
+          name='Fail HAS'
           to="/UploadHAS"
           active={activeItem === 'UploadHAS'}
         />
@@ -444,54 +417,49 @@ const updateCklist =(x)=>{
         to="/ClientAdvisorList"
         active={activeItem === 'ClientAdvisorList'}
       />
-      
     </Menu>
    }
       <ClientContext.Provider value={clientContext}>
-            <Segment className="innerContainer flexCol"  basic>
-            <Switch>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                    <Route path={`/company`}>
-                        <ClientCmpny />
-                    </Route>
-                    <Route path="/premises">
-                        <ClientPremises data={premises}  onDataChange={updatePremise}  id={cmpny.cmpnyPK} accesslvl={profile.accesslvl} />
-                    </Route>
-                    {/* <Route path="/inhalalcom">
-                        <ClientIHC data={inhalalcom}  onDataChange={updateIHC}  id={cmpny.cmpnyPK} accesslvl={profile.accesslvl} />
-                    </Route>
-                    <Route path="/training">
-                        <ClientTraining data={training}  onDataChange={updateTraining}  id={cmpny.cmpnyPK} accesslvl={profile.accesslvl} />
-                    </Route> */}
-                    <Route path="/supplier">
-                        <SupplierNavigator />
-                    </Route>
-                    <Route path="/product">
-                        <ProductNavigator />
-                    </Route>
-                    <Route path="/HASFile">
-                        <HASFileNavigator />
-                    </Route>
-                    <Route path="/HalalFile">
-                        <HalalFileNavigator />
-                    </Route>
-                    <Route path="/UploadHAS">
-                        <UploadHASNavigator />
-                    </Route>
-                    <Route path="/ClientAdvisor">
-                        <ClientAdvisor />
-                    </Route>
-                    <Route path="/ClientAdvisorList">
-                        <ClientSelectedNavigator />
-                    </Route>
-                </Switch>
+            <Segment className="innerContainer flexCol" basic>
+              <Switch>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+                <Route path={`/company`}>
+                    <ClientCmpny />
+                </Route>
+                <Route path="/premises">
+                    <ClientPremises data={premises}  onDataChange={updatePremise}  id={cmpny.cmpnyPK} accesslvl={profile.accesslvl} />
+                </Route>
+                <Route path="/supplier">
+                    <SupplierNavigator />
+                </Route>
+                <Route path="/product">
+                    <ProductNavigator />
+                </Route>
+                <Route path="/HASFile">
+                    <HASFileNavigator />
+                </Route>
+                <Route path="/HalalFile">
+                    <HalalFileNavigator />
+                </Route>
+                <Route path="/UploadHalal">
+                    <UploadHalalNavigator />
+                </Route>
+                <Route path="/UploadHAS">
+                    <UploadHASNavigator />
+                </Route>
+                <Route path="/ClientAdvisor">
+                    <ClientAdvisor />
+                </Route>
+                <Route path="/ClientAdvisorList">
+                    <ClientSelectedNavigator />
+                </Route>
+              </Switch>
             </Segment>
             </ClientContext.Provider>
-            </div>
-        
-  </div>
+    </div>
+  </div>  
   )
 }
 
