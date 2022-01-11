@@ -208,7 +208,7 @@ const updateCklist =(x)=>{
         <Menu.Item>
           <Image src={logo} size='small' verticalAlign='middle' style={{ margin: '1em 1em 1em 1em' }}/>
         </Menu.Item>
-        {!isMobile&&<Menu.Item header  as="h3" style={{color:cmpny.cmpnyConfig && cmpny.cmpnyConfig.headerTextColor? cmpny.cmpnyConfig.headerTextColor:""}}>{cmpny.cmpnyConfig && cmpny.cmpnyConfig.appName? cmpny.cmpnyConfig.appName: "Halal Management System"}</Menu.Item>}
+        {!isMobile&&<Menu.Item header  as="h4" style={{color:cmpny.cmpnyConfig && cmpny.cmpnyConfig.headerTextColor? cmpny.cmpnyConfig.headerTextColor:""}}>{cmpny.cmpnyConfig && cmpny.cmpnyConfig.appName? cmpny.cmpnyConfig.appName: "Halal Management System"}</Menu.Item>}
         <Menu.Menu position='right'>
           <Menu.Item>
            {!isMobile &&
@@ -315,7 +315,7 @@ const updateCklist =(x)=>{
           to="/UploadHAS"
           active={activeItem === 'UploadHAS'}
         />
-      <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisor')}
+      {/* <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisor')}
         icon= 'file archive'
         name='Pilih Advisor'
         to="/ClientAdvisor"
@@ -326,7 +326,7 @@ const updateCklist =(x)=>{
         name='Advisor'
         to="/ClientAdvisorList"
         active={activeItem === 'ClientAdvisorList'}
-      />
+      /> */}
       
        <Menu.Item onClick={()=>sidebarClick(signOut())} attached="bottom"
          name='Log Keluar'
@@ -335,7 +335,7 @@ const updateCklist =(x)=>{
    :
    <Menu pointing secondary vertical>
      <Menu.Item>
-          <Header as='h2'>
+          <Header as='h3'>
           {cmpny.cmpnyName}
           <Header.Subheader>
       {cmpny.cmpnyDetails.address}
@@ -403,7 +403,7 @@ const updateCklist =(x)=>{
           active={activeItem === 'UploadHAS'}
         />
 
-    <div className="ui divider"></div>
+    {/* <div className="ui divider"></div>
       <Menu.Item header>Lain-lain</Menu.Item>
       <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisor')}
         icon= 'file archive'
@@ -416,7 +416,7 @@ const updateCklist =(x)=>{
         name='Advisor'
         to="/ClientAdvisorList"
         active={activeItem === 'ClientAdvisorList'}
-      />
+      /> */}
     </Menu>
    }
       <ClientContext.Provider value={clientContext}>
