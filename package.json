@@ -48,10 +48,7 @@
         "pdfkit": "^0.12.1",
         "pdfmake": "^0.1.71",
         "react-bootstrap-sweetalert": "^5.2.0",
-<<<<<<< HEAD
-=======
         "react-card-carousel": "^1.1.3",
->>>>>>> test
         "react-checklist": "^1.0.11",
         "react-circular-progressbar": "^2.0.4",
         "react-device-detect": "^1.14.0",
@@ -62,10 +59,7 @@
         "react-popup-alert": "^2.0.0",
         "react-recaptcha-google": "^1.1.1",
         "react-router-dom": "^5.2.0",
-<<<<<<< HEAD
-=======
         "react-scroll-to-top": "^1.0.8",
->>>>>>> test
         "react-semantic-ui-datepickers": "^2.13.0",
         "react-spinners": "^0.11.0",
         "react-step-progress": "^1.0.3",
