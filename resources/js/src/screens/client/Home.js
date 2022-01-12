@@ -45,14 +45,14 @@ const Home = () => {
       <Table.Cell>{x.sp_name}</Table.Cell>
       <Table.Cell>{x.spcb_cert_bodies == null ? "Tiada": x.spcb_cert_bodies}</Table.Cell>
       <Table.Cell>{x.spcb_date_cert == null ? "Tiada": moment(x.spcb_date_cert).format('DD/MM/YYYY')}</Table.Cell>
-      <Table.Cell>{x.days_left} days left</Table.Cell>
+      <Table.Cell>{x.days_left} hari lagi</Table.Cell>
     </Table.Row>
     :
     <Table.Row className="row-warning">
       <Table.Cell >{x.sp_name}</Table.Cell>
       <Table.Cell>{x.spcb_cert_bodies == null ? "Tiada": x.spcb_cert_bodies}</Table.Cell>
       <Table.Cell>{x.spcb_date_cert == null ? "Tiada": moment(x.spcb_date_cert).format('DD/MM/YYYY')}</Table.Cell>
-      <Table.Cell>{x.days_left} days left</Table.Cell>
+      <Table.Cell>{x.days_left} hari lagi</Table.Cell>
     </Table.Row> 
   } 
     

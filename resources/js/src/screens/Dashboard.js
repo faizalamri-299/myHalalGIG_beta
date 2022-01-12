@@ -126,7 +126,7 @@ const RenderNewAdvisor = props => {
   <Table.Row>
     <Table.HeaderCell>Nama</Table.HeaderCell>
     <Table.HeaderCell>Email</Table.HeaderCell>
-    <Table.HeaderCell>Nama Syarikat</Table.HeaderCell>
+    <Table.HeaderCell>Nama Premis</Table.HeaderCell>
     <Table.HeaderCell>Tarikh Daftar</Table.HeaderCell>
     <Table.HeaderCell>Tarikh Akhir Log Masuk</Table.HeaderCell>
   </Table.Row>
@@ -162,28 +162,29 @@ const RenderDashboard = () => {
   const total =  totalcompany.map((x) => <Statistic.Value><Icon name='users' />{x.totalUser}</Statistic.Value>);
   const totalCompany =  company.map((x) => <Statistic.Value><Icon name='building' />{x.totalCompany}</Statistic.Value>);
   const totalSupplier =  supplier.map((x) => <Statistic.Value><Icon name='truck' />{x.totalSupplier}</Statistic.Value>);
-  const totalAdvisor =  totalcompany.map((x) => <Statistic.Value><Icon name='male' />{x.totalAdvisor}</Statistic.Value>);
+  // const totalAdvisor =  totalcompany.map((x) => <Statistic.Value><Icon name='male' />{x.totalAdvisor}</Statistic.Value>);
+
   return <>
   <br></br>
     <Statistic.Group widths='four'>
       <Statistic color='blue'>
         {total}
-        <Statistic.Label>Total User</Statistic.Label>
+        <Statistic.Label>Jumlah Pengguna</Statistic.Label>
       </Statistic>
 
       <Statistic color='teal'>
           {totalCompany}
-        <Statistic.Label>Total Company</Statistic.Label>
+        <Statistic.Label>Jumlah Premis</Statistic.Label>
       </Statistic>
 
       <Statistic color='violet'>
-          {totalAdvisor}
-        <Statistic.Label>Total Advisor</Statistic.Label>
+          {/* {totalAdvisor} */}<Statistic.Value><Icon name='box' />17</Statistic.Value>
+        <Statistic.Label>Jumlah Produk</Statistic.Label>
       </Statistic>
 
       <Statistic color='purple'>
         {totalSupplier}
-        <Statistic.Label>Total Supplier</Statistic.Label>
+        <Statistic.Label>Jumlah Pembekal</Statistic.Label>
       </Statistic>
     </Statistic.Group>
 </>

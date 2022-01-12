@@ -270,12 +270,12 @@ const updateCklist =(x)=>{
           to="/company"
           active={activeItem === 'company'}
         />
-       <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('premises'))}
+       {/* <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('premises'))}
          name='Premises'
          icon= 'warehouse'
          to="/premises"
          active={activeItem === 'premises'}
-       />
+       /> */}
 
        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('supplier'))}
           icon= 'truck'
@@ -356,12 +356,12 @@ const updateCklist =(x)=>{
           to="/company"
           active={activeItem === 'company'}
         />
-        <Menu.Item as={Link} onClick={()=>setactiveItem('premises')}
+        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('premises')}
           icon= 'industry'
           name='Premis 𝘭 Site 𝘭 Plan'
           to="/premises"
           active={activeItem === 'premises'}
-        />
+        /> */}
         <Menu.Item as={Link} onClick={()=>setactiveItem('supplier')}
           icon= 'truck'
           name='Pembekal'
@@ -428,9 +428,9 @@ const updateCklist =(x)=>{
                 <Route path={`/company`}>
                     <ClientCmpny />
                 </Route>
-                <Route path="/premises">
+                {/* <Route path="/premises">
                     <ClientPremises data={premises}  onDataChange={updatePremise}  id={cmpny.cmpnyPK} accesslvl={profile.accesslvl} />
-                </Route>
+                </Route> */}
                 <Route path="/supplier">
                     <SupplierNavigator />
                 </Route>

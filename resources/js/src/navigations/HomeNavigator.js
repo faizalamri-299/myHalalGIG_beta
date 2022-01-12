@@ -106,6 +106,13 @@ const HomeNavigator = () => {
           to="/company"
           active={activeItem === 'company'}
         />
+
+        <Menu.Item as={Link} onClick={()=>setactiveItem('user')}
+          icon= 'user'
+          name='Pengguna'
+          to="/profile"
+          active={activeItem === 'user'}
+        />
        
         {/* <Menu.Item as={Link} onClick={()=>setactiveItem('premises')}
           icon= 'building outline'
@@ -137,11 +144,7 @@ const HomeNavigator = () => {
           to="/advisor"
           active={activeItem === 'advisor'}
         /> */}
-        <Menu.Item as={Link} onClick={()=>setactiveItem('user')}
-          name='Senarai Pengguna'
-          to="/profile"
-          active={activeItem === 'user'}
-        />
+        
         {/* <Menu.Item as={Link} onClick={()=>setactiveItem('product')}
           icon= 'food'
           name='Produk 𝘭 Menu'
@@ -176,12 +179,12 @@ const HomeNavigator = () => {
             to="/advisorall"
             active={activeItem === 'advisorall'}
           /> */}
-        <Menu.Item as={Link} onClick={()=>setactiveItem('CArecord')}
+        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('CArecord')}
             icon= 'address card outline'
             name='Rekod Advisor Client'
             to="/CArecord"
             active={activeItem === 'CArecord'}
-          />
+          /> */}
     </Menu>
 {/* ////////////////////////////////////////////////////SIDEBAR MENU////////////////////////////////////////////////////////////////// */}
 

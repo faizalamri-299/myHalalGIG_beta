@@ -62,12 +62,13 @@ const ProfileList = () => {
   <Dropdown icon="ellipsis vertical"  className='icon' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit user' />
-    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Remove user' />
+    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Padam' />
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
-  <Table.Cell><Link to={`${url}/details/${i}`}>{x.name}</Link></Table.Cell>
+  {/* <Table.Cell><Link to={`${url}/details/${i}`}>{x.name}</Link></Table.Cell> */}
+  <Table.Cell>{x.name}</Table.Cell>
   <Table.Cell>{x.username}</Table.Cell>
   <Table.Cell>{x.cmpnyName}</Table.Cell>
   <Table.Cell>{x.rolename}</Table.Cell>
