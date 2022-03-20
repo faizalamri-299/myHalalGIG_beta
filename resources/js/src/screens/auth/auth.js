@@ -13,7 +13,7 @@ export const onAuth = (data) => {
         .then(({ data }) =>{
           console.log(data);
           resolve(data)
-        })
+        }).then()
         .catch( (error)=> {
           if (error.response) {
             // The request was made and the server responded with a status code

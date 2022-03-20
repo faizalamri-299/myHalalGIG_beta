@@ -20,6 +20,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import {SupplierContext} from '../supplier/Supplier';
 import 'react-toastify/dist/ReactToastify.css';
 import * as moment from 'moment';
+import { LinkPreview } from '@dhaiwat10/react-link-preview';
 
 export const getExp = () => {
   return new Promise( (resolve, reject)=> {
@@ -90,12 +91,8 @@ return (
               <RenderSupplier data={expired_date}/>}
           </Grid.Column>
         </Grid>
-        {/* asdas */}
-
       <br></br>
-
         <Divider></Divider>
-
       <br></br>
         <Grid>
           <Grid.Column textAlign="center">
@@ -111,6 +108,18 @@ return (
             <Button as='a' size='large' href='product'>
               Tambah Produk
             </Button>
+          </Grid.Column>
+        </Grid>
+        <br></br>
+        <Divider></Divider>
+        <br></br>
+        <Grid>
+          <Grid.Column textAlign="center">
+            <Header as='h3' style={{ fontSize: '2em' }}>
+              Baca Berita Terkini JAKIM
+            </Header>
+
+            <LinkPreview url='https://www.halal.gov.my/v4/index.php?data=bW9kdWxlcy9uZXdzOzs7Ow==&utama=ann&ids=20170104586c72bbd2a49' descriptionLength='Berita terkini dari JAKIM' fallbackImageSrc='/images/banner-berita.png'  margin="30px auto" width='700px' />
           </Grid.Column>
         </Grid>
       </Container>

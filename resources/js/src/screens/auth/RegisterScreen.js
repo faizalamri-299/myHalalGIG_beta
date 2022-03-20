@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment, Icon,Progress } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Modal, Icon,Progress } from 'semantic-ui-react'
 import {AuthContext, onAuth, signUp} from './auth';
 
 import {  Link,useHistory } from "react-router-dom";
@@ -8,6 +8,8 @@ import {  Link,useHistory } from "react-router-dom";
 import logo from '../../assets/img/gig-square.png'; 
 import  {passwordStrength}  from 'check-password-strength';
 import FlashScreen from '../FlashScreen';
+import RegisterAdvisorScreen from './RegisterScreenAdvisor';
+
 // import { Captcha, captchaSettings } from 'reactjs-captcha';
 
 const strengthLabel=[{color:'red',percent:25, label:'Berisiko Tinggi'},{color:'orange',percent:50,label:'Lemah'},{color:'yellow',percent:75,label:'Selamat'},{color:'green',percent:100,label:'Sempurna'}]
@@ -135,96 +137,183 @@ const RegisterScreen = () => {
     }
     
 return isLoading?<FlashScreen msg={loadingMsg}/>:
- <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-    <Grid.Column style={{ maxWidth: 450 }}>
-    <Image src={logo} size="medium" centered  />
-      
-      <Form size='large'>
-        <Segment stacked>
-          <Form.Input 
-          fluid 
-          icon='user' 
-          iconPosition='left' 
-          placeholder='Nama' required 
-          onChange={e=>setName(e.target.value)}
-          value={name}
-           />
 
-          <Form.Input 
-          fluid 
-          icon='mail' 
-          iconPosition='left' 
-          placeholder='Emel' required
-          type='email'
-          onChange={e=>setUsername(e.target.value)}
-          value={username}
-           />
+<Grid>
+   <Grid.Row columns={2} >
+      <Grid.Column>
+        <Image size='large' src='/images/register_image.jpg' />
+      </Grid.Column>
 
-            <Form.Input
-              required
-              onFocus={event=> event.target.select()}
-              fluid
-              icon='lock'
-              iconPosition='left'
-              placeholder='Katalaluan'
-              type='password'
-              onChange={e=>{
-                setErrorMsg("");
-                setpassword(e.target.value)
-                checkPassword(e.target.value)
-                if(password2=="default"){
-                  setpassword2("");
-                }
-              }}
-              value={password}
+      <Grid.Column>
+        
+        <Form size='large' style={{ paddingTop:'3em', paddingRight:'2em'}} >
+          <Header as='h1' >Pendaftaran Baru</Header>
+            <Form.Input 
+            fluid 
+            icon='user' 
+            iconPosition='left' 
+            placeholder='Nama' required 
+            onChange={e=>setName(e.target.value)}
+            value={name}
             />
 
-            <Form.Input
-              error={password2=="default" || password2=="" ||password==password2?null:"Password not match"}
-              required
-              onFocus={event=> event.target.select()}
-              fluid
-              icon='lock'
-              iconPosition='left'
-              placeholder='Sahkan Katalaluan'
-              type="password"
-              onChange={e=>{
-                setErrorMsg("");
-                setpassword2(e.target.value)
-              }}
-              value={password2}
+            <Form.Input 
+            fluid 
+            icon='mail' 
+            iconPosition='left' 
+            placeholder='Emel' required
+            type='email'
+            onChange={e=>setUsername(e.target.value)}
+            value={username}
             />
-          {pwdLevel!==null && 
-            <Grid.Column>
-              <Progress {...strengthLabel[pwdLevel]} />
-            </Grid.Column>
-          } 
-          {errorMsg &&
-            <Message negative>
-            <p>{errorMsg}</p>
-          </Message>
-          }
-            <Button color='teal' fluid size='large' type='submit' onClick={() => submitForm()}>
-            Daftar
-          </Button>
 
+              <Form.Input
+                required
+                onFocus={event=> event.target.select()}
+                fluid
+                icon='lock'
+                iconPosition='left'
+                placeholder='Katalaluan'
+                type='password'
+                onChange={e=>{
+                  setErrorMsg("");
+                  setpassword(e.target.value)
+                  checkPassword(e.target.value)
+                  if(password2=="default"){
+                    setpassword2("");
+                  }
+                }}
+                value={password}
+              />
 
-          {/* <button data-action='submit'onClick={e => onFormSubmit(e)}>Submit</button> */}
-          
-          {/*          <Button color='red' onClick={() => {resetForm();}}>
-          <Icon name='remove' /> No
-        </Button>
-        <Button color='green' onClick={() => {submitForm();}}>
-          <Icon name='checkmark' /> Submit
-        </Button> */}
-        </Segment>
-      </Form>
-
-      <Message>
-        Telah Mendaftar? <Link to="/">Kembali Ke Log Masuk</Link>
-      </Message>
-    </Grid.Column>
+              <Form.Input
+                error={password2=="default" || password2=="" ||password==password2?null:"Password not match"}
+                required
+                onFocus={event=> event.target.select()}
+                fluid
+                icon='lock'
+                iconPosition='left'
+                placeholder='Sahkan Katalaluan'
+                type="password"
+                onChange={e=>{
+                  setErrorMsg("");
+                  setpassword2(e.target.value)
+                }}
+                value={password2}
+              />
+            {pwdLevel!==null && 
+              <Grid.Column>
+                <Progress {...strengthLabel[pwdLevel]} />
+              </Grid.Column>
+            } 
+            {errorMsg &&
+              <Message negative>
+                <p>{errorMsg}</p>
+              </Message>
+              
+            }
+              <Button color='teal' fluid size='large' type='submit' onClick={() => submitForm()}>
+              Daftar
+            </Button>
+            <br></br>
+            {/* <Modal trigger={<Link style={{position: 'absolute', right: '2em'}}>Daftar Sebagai Advisor?</Link>} content={<RegisterAdvisorScreen />} /> */}
+        </Form>
+        
+      </Grid.Column>
+    </Grid.Row>    
   </Grid>
+
+
+//  <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+//     <Grid.Column style={{ maxWidth: 450 }}>
+//     <Image src={logo} size="medium" centered  />
+      
+//       <Form size='large'>
+//         <Segment stacked>
+//           <Form.Input 
+//           fluid 
+//           icon='user' 
+//           iconPosition='left' 
+//           placeholder='Nama' required 
+//           onChange={e=>setName(e.target.value)}
+//           value={name}
+//            />
+
+//           <Form.Input 
+//           fluid 
+//           icon='mail' 
+//           iconPosition='left' 
+//           placeholder='Emel' required
+//           type='email'
+//           onChange={e=>setUsername(e.target.value)}
+//           value={username}
+//            />
+
+//             <Form.Input
+//               required
+//               onFocus={event=> event.target.select()}
+//               fluid
+//               icon='lock'
+//               iconPosition='left'
+//               placeholder='Katalaluan'
+//               type='password'
+//               onChange={e=>{
+//                 setErrorMsg("");
+//                 setpassword(e.target.value)
+//                 checkPassword(e.target.value)
+//                 if(password2=="default"){
+//                   setpassword2("");
+//                 }
+//               }}
+//               value={password}
+//             />
+
+//             <Form.Input
+//               error={password2=="default" || password2=="" ||password==password2?null:"Password not match"}
+//               required
+//               onFocus={event=> event.target.select()}
+//               fluid
+//               icon='lock'
+//               iconPosition='left'
+//               placeholder='Sahkan Katalaluan'
+//               type="password"
+//               onChange={e=>{
+//                 setErrorMsg("");
+//                 setpassword2(e.target.value)
+//               }}
+//               value={password2}
+//             />
+//           {pwdLevel!==null && 
+//             <Grid.Column>
+//               <Progress {...strengthLabel[pwdLevel]} />
+//             </Grid.Column>
+//           } 
+//           {errorMsg &&
+//             <Message negative>
+//             <p>{errorMsg}</p>
+//           </Message>
+//           }
+//             <Button color='teal' fluid size='large' type='submit' onClick={() => submitForm()}>
+//             Daftar
+//           </Button>
+
+
+//           {/* <button data-action='submit'onClick={e => onFormSubmit(e)}>Submit</button> */}
+          
+//           {/*          <Button color='red' onClick={() => {resetForm();}}>
+//           <Icon name='remove' /> No
+//         </Button>
+//         <Button color='green' onClick={() => {submitForm();}}>
+//           <Icon name='checkmark' /> Submit
+//         </Button> */}
+//         </Segment>
+//       </Form>
+
+//       <Message>
+//         Telah Mendaftar? <Link to="/">Kembali Ke Log Masuk</Link>
+//       </Message>
+//     </Grid.Column>
+//   </Grid>
   
 
 

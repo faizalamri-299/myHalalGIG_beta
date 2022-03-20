@@ -1,4 +1,4 @@
-import React,{useContext } from 'react'
+import React, {useContext, useState } from 'react'
 import {
   Input, Menu, Segment,
   Checkbox,
@@ -16,16 +16,31 @@ import {
 import {Switch,Route,Link,useRouteMatch} from "react-router-dom";
 import {HASFileContext, getHASFile, postHASFile} from './HASFile';
 
-
+import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+// import samplePDF from './sample.pdf';
 
 const TabSuratLantikan = () => {
   let { path, url } = useRouteMatch();
+
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState (1);
+
+  function onDocumentLoadSuccess({numPages}) {
+    setNumPages(numPages);
+    setPageNumber(1);
+  }
 
 
   return (
 
   <Transition transitionOnMount={true} animation="fade" duration={1000}>
     <div className="in innerContainer" style={{height:'70vh', overflowY:'auto'}}> 
+    {/* <Header className="App-header">
+      <Document file={samplePDF} onLoadSuccess={onDocumentLoadSuccess}>
+        <Page height="600" pageNumber={pageNumber}/>
+      </Document>
+    </Header> */}
+
   <Header as='h3'>Surat Lantikan Pekerja</Header>
       <Table celled>
         <Table.Header>

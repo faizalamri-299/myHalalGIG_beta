@@ -270,13 +270,6 @@ const updateCklist =(x)=>{
           to="/company"
           active={activeItem === 'company'}
         />
-       {/* <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('premises'))}
-         name='Premises'
-         icon= 'warehouse'
-         to="/premises"
-         active={activeItem === 'premises'}
-       /> */}
-
        <Menu.Item as={Link} onClick={()=>sidebarClick(setactiveItem('supplier'))}
           icon= 'truck'
           name='Pembekal'
@@ -315,19 +308,6 @@ const updateCklist =(x)=>{
           to="/UploadHAS"
           active={activeItem === 'UploadHAS'}
         />
-      {/* <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisor')}
-        icon= 'file archive'
-        name='Pilih Advisor'
-        to="/ClientAdvisor"
-        active={activeItem === 'ClientAdvisor'}
-      />
-      <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisorList')}
-        icon= 'file archive'
-        name='Advisor'
-        to="/ClientAdvisorList"
-        active={activeItem === 'ClientAdvisorList'}
-      /> */}
-      
        <Menu.Item onClick={()=>sidebarClick(signOut())} attached="bottom"
          name='Log Keluar'
        />
@@ -356,12 +336,6 @@ const updateCklist =(x)=>{
           to="/company"
           active={activeItem === 'company'}
         />
-        {/* <Menu.Item as={Link} onClick={()=>setactiveItem('premises')}
-          icon= 'industry'
-          name='Premis 𝘭 Site 𝘭 Plan'
-          to="/premises"
-          active={activeItem === 'premises'}
-        /> */}
         <Menu.Item as={Link} onClick={()=>setactiveItem('supplier')}
           icon= 'truck'
           name='Pembekal'
@@ -402,21 +376,6 @@ const updateCklist =(x)=>{
           to="/UploadHAS"
           active={activeItem === 'UploadHAS'}
         />
-
-    {/* <div className="ui divider"></div>
-      <Menu.Item header>Lain-lain</Menu.Item>
-      <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisor')}
-        icon= 'file archive'
-        name='Pilih Advisor'
-        to="/ClientAdvisor"
-        active={activeItem === 'ClientAdvisor'}
-      />
-      <Menu.Item as={Link} onClick={()=>setactiveItem('ClientAdvisorList')}
-        icon= 'file archive'
-        name='Advisor'
-        to="/ClientAdvisorList"
-        active={activeItem === 'ClientAdvisorList'}
-      /> */}
     </Menu>
    }
       <ClientContext.Provider value={clientContext}>
@@ -428,9 +387,6 @@ const updateCklist =(x)=>{
                 <Route path={`/company`}>
                     <ClientCmpny />
                 </Route>
-                {/* <Route path="/premises">
-                    <ClientPremises data={premises}  onDataChange={updatePremise}  id={cmpny.cmpnyPK} accesslvl={profile.accesslvl} />
-                </Route> */}
                 <Route path="/supplier">
                     <SupplierNavigator />
                 </Route>
