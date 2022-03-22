@@ -115,8 +115,8 @@ const ClientIHC = ({data,onDataChange,id,accesslvl}) => {
       <Dropdown  icon="ellipsis vertical"  className='icon' 
       pointing='top left'>
       <Dropdown.Menu className='right'>
-        <Dropdown.Item  onClick={()=>editForm(x.id)} color='blue' icon='edit outline' text='Edit' />
-        <Dropdown.Item  onClick={()=>deleteForm(x.id)} icon='trash' text='Remove' />
+        <Dropdown.Item  onClick={()=>editForm(x.id)} color='blue' icon='edit outline' text='Kemaskini' />
+        <Dropdown.Item  onClick={()=>deleteForm(x.id)} icon='trash' text='Padam' />
       </Dropdown.Menu>
     </Dropdown>
     </Table.Cell>
@@ -163,7 +163,8 @@ return <Table >
 }
       
   return <React.Fragment>
-    <Button fluid as='div' labelPosition='right'>
+    <Header as='h3'>Senarai Jawatankuasa Halal Dalaman</Header>
+    <Button fluid as='div' labelPosition='right'>    
     <Button fluid onClick={()=>setModalOpen(true)} basic color='green' > <Icon name='plus' />Tambah Jawatankuasa Halal Dalaman</Button>
       {/* <Label basic > */}
       {/* <Input 
@@ -180,7 +181,7 @@ return <Table >
               /> */}
       {/* </Label> */}
     </Button>
-      <Divider/>
+      {/* <Divider/> */}
      
   {ihcFilter.length>0 ? <RenderProfile data={ihcFilter} />:
       <Message warning content='Tiada rekod dijumpai'/>
@@ -249,10 +250,10 @@ return <Table >
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>

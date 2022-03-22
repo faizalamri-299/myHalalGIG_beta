@@ -159,7 +159,8 @@ const updateRawMaterial=(x)=>{
      return (
 
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-      <div className="in innerContainer listScroll">
+      {/* <div className="in innerContainer listScroll"> */}
+      <div className="in innerContainer">
         <Header as='h3' dividing style={{ lineHeight: '2em' }}>
           <Button size='medium' circular icon='angle left' basic color='green' as={Link} to={`${url.split("/detail").shift()}`} />
           {halaldetail.sp_name} </Header>

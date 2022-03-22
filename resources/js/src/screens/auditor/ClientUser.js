@@ -161,8 +161,8 @@ const ClientUser = ({data,onDataChange,id,accesslvl}) => {
   <Dropdown icon="ellipsis vertical"  className='icon' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit user' />
-    {accesslvl<3 && <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Remove user' />}
+    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+    {accesslvl<3 && <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Padam' />}
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
@@ -182,7 +182,7 @@ const ClientUser = ({data,onDataChange,id,accesslvl}) => {
       
   return <React.Fragment>
     <Button fluid as='div' labelPosition='right'>
-    <Button fluid onClick={()=>setModalOpen(true)} basic color='green' > <Icon name='plus' />Add</Button>
+    <Button fluid onClick={()=>setModalOpen(true)} basic color='green' > <Icon name='plus' />Tambah</Button>
       <Label basic >
       <Input 
                 icon={{ name: 'search', link: true }}
@@ -310,10 +310,10 @@ const ClientUser = ({data,onDataChange,id,accesslvl}) => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' type="submit" form="userEdit" >
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>

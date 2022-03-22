@@ -922,7 +922,7 @@ const history = useHistory();
           history.goBack();
           clearDraft();
           reloadData(k);
-      })}}>Save</Button>
+      })}}>Simpan</Button>
 
 <Button color="teal" fluid onClick={()=>printCklist()}>Print</Button>
       </Segment>

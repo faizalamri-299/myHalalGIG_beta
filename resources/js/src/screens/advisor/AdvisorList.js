@@ -69,8 +69,8 @@ const AdvisorList = () => {
     <Dropdown.Menu className='right'>
       {x.level_name == null ? <Dropdown.Item  onClick={()=>editLevelForm(x)} color='blue' icon='pencil' text='Add User Level' /> 
       : <Dropdown.Item  onClick={()=>updateLevelForm(x)} color='blue' icon='pencil' text='Update User Level' />}
-      <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit user' />
-      <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Remove user' />
+      <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+      <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Padam' />
     </Dropdown.Menu>
   </Dropdown>
     </Table.Cell>
@@ -206,7 +206,7 @@ const AdvisorList = () => {
        
         <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Tambah</Button>
       <Divider/>
-      <div style={{height:'70vh', overflowY:'auto'}}>
+      <div style={{height:'68vh', overflowY:'auto'}}>
       {(userFilter && userFilter.length)&&<RenderAdvisor data={userFilter}/>}
   <Modal style={{position:'relative',height:'auto'}}
               onClose={() =>{ setModalOpen(false),resetForm()}}
@@ -250,10 +250,10 @@ const AdvisorList = () => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>
@@ -289,10 +289,10 @@ const AdvisorList = () => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalLevelOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalLevelOpen(false); submitLevelForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>  
@@ -328,10 +328,10 @@ const AdvisorList = () => {
           </Modal.Content>
           <Modal.Actions>
             <Button color='red' onClick={() => {setModalupdateLevelOpen(false); resetForm();}}>
-              <Icon name='remove' /> No
+              <Icon name='remove' /> Batal
             </Button>
             <Button color='green' onClick={() => {setModalupdateLevelOpen(false); submitUpdateLevelForm();location.reload()}}>
-              <Icon name='checkmark' /> Submit
+              <Icon name='checkmark' /> Simpan
             </Button>
           </Modal.Actions>
         </Modal>    

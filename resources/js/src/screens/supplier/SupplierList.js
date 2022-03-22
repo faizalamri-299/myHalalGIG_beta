@@ -439,9 +439,9 @@ const deleteSupplierList=(pk)=>{
 
         <Header as='h3' floated='left'>Senarai Pembekal</Header>
        
-        <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Add</Button>
+        <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Tambah Pembekal</Button>
         <Divider/>
-          <div style={{height:'70vh', overflowY:'auto'}}>
+          <div style={{height:'68vh', overflowY:'auto'}}>
             {SupplierFilter < 1 ? 
         <Message info>    
           <Message.Header>Tiada Maklumat</Message.Header>
@@ -482,10 +482,10 @@ const deleteSupplierList=(pk)=>{
 
           <Modal.Actions>
             <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-              <Icon name='remove' /> No
+              <Icon name='remove' /> Batal
             </Button>
             <Button color='green' onClick={() => {setModalOpen(false); submitForm()}}>
-              <Icon name='checkmark' /> Submit
+              <Icon name='checkmark' /> Simpan
             </Button>
           </Modal.Actions>
         </Modal>

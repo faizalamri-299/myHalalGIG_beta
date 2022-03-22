@@ -248,8 +248,8 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
   <Dropdown icon="ellipsis vertical"  className='icon' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit' />
-    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Remove' />
+    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Padam' />
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
@@ -280,8 +280,8 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
   <Dropdown icon="ellipsis vertical"  className='icon' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit' />
-    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Remove' />
+    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Padam' />
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
@@ -312,8 +312,8 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
   <Dropdown icon="ellipsis vertical"  className='icon' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit' />
-    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Remove' />
+    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Padam' />
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
@@ -344,8 +344,8 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
   <Dropdown icon="ellipsis vertical"  className='icon' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit' />
-    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Remove' />
+    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+    <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Padam' />
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
@@ -552,10 +552,10 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>
@@ -597,10 +597,10 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpenAca(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpenAca(false); submitFormAca();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>
@@ -635,10 +635,10 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpenAch(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpenAch(false); submitFormAch();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>
@@ -673,10 +673,10 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpenAct(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpenAct(false); submitFormAct();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>
@@ -720,10 +720,10 @@ const AdvisorProfile = ({data,onDataChange,id,accesslvl}) => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpenProfil(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpenProfil(false); submitFormProfil();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>

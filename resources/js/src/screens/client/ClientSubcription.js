@@ -193,8 +193,8 @@ reloadSubcr(x);
     <Dropdown  icon="ellipsis vertical"  className='icon' 
     pointing='top left'>
     <Dropdown.Menu className='right'>
-      <Dropdown.Item  onClick={()=>editForm(pg)} color='blue' icon='edit outline' text='Edit' />
-      <Dropdown.Item  onClick={()=>deleteForm(pg)} icon='trash' text='Remove' />
+      <Dropdown.Item  onClick={()=>editForm(pg)} color='blue' icon='edit outline' text='Kemaskini' />
+      <Dropdown.Item  onClick={()=>deleteForm(pg)} icon='trash' text='Padam' />
     </Dropdown.Menu>
   </Dropdown>
   </List.Content>
@@ -298,10 +298,10 @@ reloadSubcr(x);
                   </Modal.Content>
                   <Modal.Actions>
                     <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                      <Icon name='remove' /> No
+                      <Icon name='remove' /> Batal
                     </Button>
                     <Button color='green' type="submit" form="subcrform" >
-                      <Icon name='checkmark' /> Submit
+                      <Icon name='checkmark' /> Simpan
                     </Button>
                   </Modal.Actions>
                 </Modal>

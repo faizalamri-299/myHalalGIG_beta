@@ -58,8 +58,8 @@ const TabLabAnalysis = () => {
   <Dropdown icon="ellipsis vertical"  className='icon' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit details' />
-    <Dropdown.Item  onClick={()=>deleteCB(x.id)} icon='trash' text='Remove user' />
+    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+    <Dropdown.Item  onClick={()=>deleteCB(x.id)} icon='trash' text='Padam' />
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
@@ -146,7 +146,7 @@ const TabLabAnalysis = () => {
           <Button onClick={()=>setModalOpen(true)} fluid color='teal' > <Icon name='plus' />Tambah</Button>
           <Divider/>
       
-      <div style={{height:'70vh', overflowY:'auto'}}>
+      <div style={{height:'68vh', overflowY:'auto'}}>
       {/* {(userFilter && userFilter.length)&&<RenderProfile data={userFilter}/>} */}
       {userFilter < 1 ? 
         <Message info>    
@@ -177,10 +177,10 @@ const TabLabAnalysis = () => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal> 

@@ -189,8 +189,8 @@ return <Grid>
               disabled={process} >
               Log Masuk
             </Button>
-            <br></br>
-            <Modal trigger={<Link style={{position: 'absolute', right: 0}}>Lupa Katalaluan?</Link>} content={<div>lupa password</div>} />
+            {/* <br></br> */}
+            {/* <Modal trigger={<Link style={{position: 'absolute', right: 0}}>Lupa Katalaluan?</Link>} content={<div>lupa password</div>} /> */}
         </Form>   
       </Grid.Column>
       

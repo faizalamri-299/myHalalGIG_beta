@@ -1014,7 +1014,7 @@ const panesPharmaceutical = [
 
   return (
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-    <div className="container-fluid">
+    <div>
       <>
       {cmpny.cmpnyDetails.skimproduk==='Barang Gunaan'?
      (<Grid>

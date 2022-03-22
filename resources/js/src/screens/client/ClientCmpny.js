@@ -13,7 +13,7 @@ import {
   Table,
   Tab,
   Modal,
-  Form,Dropdown, Dimmer, Loader,
+  Form,Popup, Dimmer, Loader,
 } from 'semantic-ui-react';
 
 import * as moment from 'moment';
@@ -260,14 +260,20 @@ const [cmpnyFile1, setcmpnyFile1] = React.useState("");
      return (
 
       <Transition transitionOnMount={true} animation="fade" duration={1000}>
-        <div className="in innerContainer" style={{overflowY:'auto'}}>
-        <Header as='h3' dividing style={{ lineHeight: '2em' }}>
+        {/* <div className="in innerContainer" style={{overflowY:'auto'}}> */}
+        {/* <div style={{overflowY:'auto', height:'80vh'}}> */}
+        <div>
+        {/* <Header as='h3' dividing style={{ lineHeight: '2em' }}> */}
             {/* <Button size='medium' circular icon='angle left' basic color='green' as={Link} to={`${url.split("/details").shift()}`} /> */}
-              {cmpny.cmpnyName} </Header>
+              {/* {cmpny.cmpnyName} </Header>
 
 
               <Segment.Group style={{ width: '70%', marginLeft:'15%'}}>
-              <Segment color='green' >
+              <Segment color='green' > */}
+
+              <Header as='h3' dividing style={{ lineHeight: '2em' }}>Syarikat {cmpny.cmpnyName} </Header>
+              <Segment.Group>
+                <Segment color='teal'>
               <Header as='h3' dividing>Maklumat Syarikat </Header>
  
               <HeaderAction as="h3"
@@ -283,6 +289,7 @@ const [cmpnyFile1, setcmpnyFile1] = React.useState("");
               />
             }>Logo Syarikat</HeaderAction>
            <React.Fragment>
+             <br></br>
                 <Image src={cmpny.cmpnyConfig && cmpny.cmpnyConfig.headerLogo? cmpny.cmpnyConfig.headerLogo:dp} size="small" centered />
             </React.Fragment>
             </Segment>
@@ -308,7 +315,8 @@ const [cmpnyFile1, setcmpnyFile1] = React.useState("");
               <Segment>
              
               <Grid textAlign='left' stackable columns={2} style={{ width: '100%',position:'center' }}>
-                <Grid.Column style={{ width: '50%', position:'center'}}>
+                {/* <Grid.Column style={{ width: '50%', position:'center'}}> */}
+                <Grid.Column><br></br>
                 <Header sub>Nama Syarikat </Header> 
                   <span>{cmpny.cmpnyName && cmpny.cmpnyName? cmpny.cmpnyName:"Tiada Maklumat"}</span>
                   <Header sub>Alamat Syarikat</Header>
@@ -324,8 +332,10 @@ const [cmpnyFile1, setcmpnyFile1] = React.useState("");
                   <span>{cmpny.cmpnyDetails && cmpny.cmpnyDetails.pegawainotel? cmpny.cmpnyDetails.pegawainotel:"Tiada Maklumat"}</span>
                   </Grid.Column>
 
-                  <Grid.Column style={{ width: '50%'}}>
-                  <Header sub>No Pendaftaran Syarikat <Button onClick={()=>editFormCmpny()} style={{position: 'absolute',right: 5,top: 5,outline: 'none', background:'none'}} ><Icon size="large" name='pencil' color='green' /></Button></Header> 
+                  {/* <Grid.Column style={{ width: '50%'}}>
+                  <Header sub>No Pendaftaran Syarikat <Button onClick={()=>editFormCmpny()} style={{position: 'absolute',right: 5,top: 5,outline: 'none', background:'none'}} ><Icon size="large" name='pencil' color='green' /></Button></Header>  */}
+                  <Grid.Column><br></br>
+                  <Header sub>No Pendaftaran Syarikat </Header>        
                   <span>{cmpny.cmpnyDetails && cmpny.cmpnyDetails.regNo? cmpny.cmpnyDetails.regNo:"Tiada Maklumat"}</span>
                   <Header sub>Status Syarikat</Header>
                   <span>{cmpny.cmpnyDetails && cmpny.cmpnyDetails.statussyarikat? cmpny.cmpnyDetails.statussyarikat:"Tiada Maklumat"}</span>
@@ -339,6 +349,7 @@ const [cmpnyFile1, setcmpnyFile1] = React.useState("");
                   <span>{typeindustry}</span>
                   {/* <span>{cmpny.cmpnyDetails && cmpny.cmpnyDetails.saizindustri? cmpny.cmpnyDetails.saizindustri:"Tiada Maklumat"}</span> */}
                   </Grid.Column>
+                  <Popup position='right center' content='Kemaskini?' trigger={<Button onClick={()=>editFormCmpny()} style={{position: 'absolute',right: 5,top: 5,outline: 'none', background:'none'}} ><Icon size="large" name='pencil' color='green' /></Button>} />
                   </Grid>
 
               <div>
@@ -547,10 +558,10 @@ const [cmpnyFile1, setcmpnyFile1] = React.useState("");
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setmodalOpenCmpny(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setmodalOpenCmpny(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>

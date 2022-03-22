@@ -161,7 +161,7 @@ const panes = [
                   </Tab.Pane>,
   },
   {
-    menuItem: { key: 'antityphoid', content: '4. Rekod Suntikan Typhoid' },
+    menuItem: { key: 'antityphoid', content: '4. Rekod Suntikan Anti Typhoid' },
     render: () => <Tab.Pane>
                     <TabSuntikanATyphoid/>
                   </Tab.Pane>,
@@ -173,7 +173,7 @@ const panes = [
                   </Tab.Pane>,
   },
   {
-    menuItem: { key: 'Sertus', content: '6. Rekod Sertu' },
+    menuItem: { key: 'Sertu', content: '6. Rekod Sertu' },
     render: () => <Tab.Pane>
                     <TabSertuRekod/>
                   </Tab.Pane>,
@@ -185,7 +185,7 @@ const panes = [
                   </Tab.Pane>,
   },
   {
-    menuItem: { key: 'kesanhalal', content: '8.Rekod Pengesanan Halal' },
+    menuItem: { key: 'kesanhalal', content: '8. Rekod Pengesanan Halal' },
     render: () => <Tab.Pane>
                     <TabRekodKesanHalal/>
                   </Tab.Pane>,
@@ -196,14 +196,270 @@ const panes = [
                     <TabAkuJanji/>
                   </Tab.Pane>,
   },
-
 ]
+
+const panesfoodbev = [
+  {
+    menuItem: { key: 'suratlantik', content: '1. Surat Lantikan Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabSuratLantikan/>
+                  </Tab.Pane>,
+  },         
+  {
+    menuItem: { key: 'rekodMperosak', content: '2. Rekod Kawalan Makhluk Perosak' },
+    render: () => <Tab.Pane>
+                    <TabKawalanMakhlukPerosak/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'antityphoid', content: '3. Rekod Suntikan Anti Typhoid' },
+    render: () => <Tab.Pane>
+                    <TabSuntikanATyphoid/>
+                  </Tab.Pane>,
+  },
+]
+
+const panesfoodpremise = [
+  {
+    menuItem: { key: 'suratlantik', content: '1. Surat Lantikan Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabSuratLantikan/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodkerja', content: '2. Rekod Maklumat Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabStaffInfo/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodMperosak', content: '3. Rekod Kawalan Makhluk Perosak' },
+    render: () => <Tab.Pane>
+                    <TabKawalanMakhlukPerosak/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'antityphoid', content: '4. Rekod Suntikan Anti Typhoid' },
+    render: () => <Tab.Pane>
+                    <TabSuntikanATyphoid/>
+                  </Tab.Pane>,
+  },
+]
+
+const panesslaughtering = [
+  {
+    menuItem: { key: 'suratlantik', content: '1. Surat Lantikan Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabSuratLantikan/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodMperosak', content: '2. Rekod Kawalan Makhluk Perosak' },
+    render: () => <Tab.Pane>
+                    <TabKawalanMakhlukPerosak/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'antityphoid', content: '3. Rekod Suntikan Anti Typhoid' },
+    render: () => <Tab.Pane>
+                    <TabSuntikanATyphoid/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'slaughtering', content: '4. Rekod Sembelihan' },
+    render: () => <Tab.Pane>
+                    <TabRekodSembelihan/>
+                  </Tab.Pane>,
+  },
+]
+
+const panesconsumergood = [
+  {
+    menuItem: { key: 'suratlantik', content: '1. Surat Lantikan Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabSuratLantikan/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodkerja', content: '2. Rekod Maklumat Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabStaffInfo/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodMperosak', content: '3. Rekod Kawalan Makhluk Perosak' },
+    render: () => <Tab.Pane>
+                    <TabKawalanMakhlukPerosak/>
+                  </Tab.Pane>,
+  },
+]
+
+const panespharma = [
+  {
+    menuItem: { key: 'suratlantik', content: '1. Surat Lantikan Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabSuratLantikan/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodkerja', content: '2. Rekod Maklumat Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabStaffInfo/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodMperosak', content: '3. Rekod Kawalan Makhluk Perosak' },
+    render: () => <Tab.Pane>
+                    <TabKawalanMakhlukPerosak/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'staffsihat', content: '4. Rekod Kesihatan Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabStaffHealth/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'akujanji', content: '5. Surat Aku Janji' },
+    render: () => <Tab.Pane>
+                    <TabAkuJanji/>
+                  </Tab.Pane>,
+  },
+]
+
+const paneslogistic = [
+  {
+    menuItem: { key: 'suratlantik', content: '1. Surat Lantikan Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabSuratLantikan/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'Sertu', content: '2. Rekod Sertu' },
+    render: () => <Tab.Pane>
+                    <TabSertuRekod/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'kesanhalal', content: '3.Rekod Pengesanan Halal' },
+    render: () => <Tab.Pane>
+                    <TabRekodKesanHalal/>
+                  </Tab.Pane>,
+  },
+]
+
+const panescosmetic = [
+  {
+    menuItem: { key: 'suratlantik', content: '1. Surat Lantikan Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabSuratLantikan/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodkerja', content: '2. Rekod Maklumat Pekerja' },
+    render: () => <Tab.Pane>
+                    <TabStaffInfo/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'rekodMperosak', content: '3. Rekod Kawalan Makhluk Perosak' },
+    render: () => <Tab.Pane>
+                    <TabKawalanMakhlukPerosak/>
+                  </Tab.Pane>,
+  },
+]
+
 
   return (
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-    <div className="container-fluid">
-      <>         
-      <Tab panes={panes} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/> 
+    {/* <div className="container-fluid"> */}
+    <div>
+      <>   
+      {cmpny.cmpnyDetails.skimproduk==='Barang Gunaan'?      
+      (
+        <Grid>
+          <Grid.Row>
+            <Grid.Column>
+            <Header as='h3' dividing>Skim Produk: Barang Gunaan</Header>
+            <Tab panes={panesconsumergood} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      ):
+      cmpny.cmpnyDetails.skimproduk==='Produk Makanan / Minuman / Makanan Tambahan'?
+      (
+        <Grid>
+          <Grid.Row>
+            <Grid.Column>
+            <Header as='h3' dividing>Skim Produk: Produk Makanan / Minuman / Makanan Tambahan</Header>
+            <Tab panes={panesfoodbev} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/>            
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      ):
+      cmpny.cmpnyDetails.skimproduk==='Premis Makanan'?
+      (
+        <Grid>
+          <Grid.Row>
+            <Grid.Column>
+            <Header as='h3' dividing>Skim Produk: Premis Makanan</Header>
+            <Tab panes={panesfoodpremise} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/>            
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      ):
+      cmpny.cmpnyDetails.skimproduk==='Rumah Sembelihan'?
+      (
+      <Grid>
+          <Grid.Row>
+            <Grid.Column>
+            <Header as='h3' dividing>Skim Produk: Rumah Sembelihan</Header>
+            <Tab panes={panesslaughtering} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/>            
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      ):
+      cmpny.cmpnyDetails.skimproduk==='Kosmetik dan Dandanan Diri'?
+      (
+      <Grid>
+      <Grid.Row>
+        <Grid.Column>
+        <Header as='h3' dividing>Skim Produk: Kosmetik dan Dandanan Diri</Header>
+        <Tab panes={panescosmetic} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/>            
+        </Grid.Column>
+        </Grid.Row>
+      </Grid>
+      ):
+      cmpny.cmpnyDetails.skimproduk==='Logistik'?
+      (
+        <Grid>
+        <Grid.Row>
+          <Grid.Column>
+          <Header as='h3' dividing>Skim Produk: Logistik</Header>
+          <Tab panes={paneslogistic} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/>            
+          </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        ):
+      cmpny.cmpnyDetails.skimproduk==='Farmaseutikal'?
+      (
+        <Grid>
+        <Grid.Row>
+          <Grid.Column>
+          <Header as='h3' dividing>Skim Produk: Farmaseutikal</Header>
+          <Tab panes={panespharma} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/>            
+          </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        ):
+          <Grid>
+          <Grid.Row>
+            <Grid.Column>
+            <Tab panes={panes} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/>
+            </Grid.Column>
+            </Grid.Row>
+          </Grid>
+      }
       </>
       
       

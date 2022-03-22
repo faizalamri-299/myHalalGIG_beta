@@ -183,7 +183,7 @@ const ProfileList = () => {
        
         <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Tambah Pengguna</Button>
       <Divider/>
-      <div style={{height:'70vh', overflowY:'auto'}}>
+      <div style={{height:'68vh', overflowY:'auto'}}>
       {(userFilter && userFilter.length)&&<RenderProfile data={userFilter}/>}
   <Modal style={{position:'relative',height:'auto'}}
               onClose={() =>{ setModalOpen(false),resetForm()}}

@@ -34,7 +34,7 @@ const TabSuratLantikan = () => {
   return (
 
   <Transition transitionOnMount={true} animation="fade" duration={1000}>
-    <div className="in innerContainer" style={{height:'70vh', overflowY:'auto'}}> 
+    <div className="in innerContainer" style={{height:'68vh', overflowY:'auto'}}> 
     {/* <Header className="App-header">
       <Document file={samplePDF} onLoadSuccess={onDocumentLoadSuccess}>
         <Page height="600" pageNumber={pageNumber}/>

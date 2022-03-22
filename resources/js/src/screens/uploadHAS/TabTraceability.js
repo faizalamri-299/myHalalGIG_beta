@@ -283,7 +283,8 @@ const TabTraceability = () => {
   return (
 
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-      <div className="in innerContainer">
+      {/* <div className="in innerContainer"> */}
+      <div>
         <Header as='h3'>Kebolehkesanan</Header> 
         <Form.Group style={{display:'flex'}}>
         <Form.Input

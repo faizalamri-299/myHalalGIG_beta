@@ -128,17 +128,17 @@ class DesktopContainer extends Component {
                   Tentang
                 </Menu.Item>
 
-                <Menu.Item as='a' as={Link} to="features" spy={true} smooth={true}>
+                {/* <Menu.Item as='a' as={Link} to="features" spy={true} smooth={true}>
                   Ciri-ciri
                 </Menu.Item>
 
                 <Menu.Item as='a' as={Link} to="feedback" spy={true} smooth={true}>
                   Maklumbalas
-                </Menu.Item>
+                </Menu.Item> */}
 
                 <Menu.Item position='right'>
                   <Modal trigger={<Button style={{ marginLeft: '0.5em' }} color='blue'>Log Masuk</Button>} content={<SignInScreen />} />
-                  <Modal trigger={<Button style={{ marginLeft: '0.5em' }} color='teal'>Daftar</Button>} content={<RegisterScreen />} />
+                  {/* <Modal trigger={<Button style={{ marginLeft: '0.5em' }} color='teal'>Daftar</Button>} content={<RegisterScreen />} /> */}
                 </Menu.Item>
               </Container>
             </Menu></Transition>
@@ -189,13 +189,13 @@ class MobileContainer extends Component {
                   Tentang
                 </Menu.Item>
 
-                <Menu.Item as='a' as={Link} to="features" spy={true} smooth={true}>
+                {/* <Menu.Item as='a' as={Link} to="features" spy={true} smooth={true}>
                   Ciri-ciri
                 </Menu.Item>
 
                 <Menu.Item as='a' as={Link} to="feedback" spy={true} smooth={true}>
                   Maklumbalas
-                </Menu.Item>
+                </Menu.Item> */}
 
                 <Menu.Item>
                   <Button as='a' href='login' color='blue'>
@@ -296,7 +296,7 @@ const HomepageLayout = () => (
   </div>
 
  
-  <div id="features" className='headerimage23' style={{ paddingTop: '10em'}}>
+  {/* <div id="features" className='headerimage23' style={{ paddingTop: '10em'}}>
     <div style={{ paddingLeft: '10em'}}>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
@@ -372,9 +372,9 @@ const HomepageLayout = () => (
         </Grid.Row>
       </Grid>
     </div> 
-  </div>
+  </div> */}
 
-  <div id="feedback" className="headerimage3">
+  {/* <div id="feedback" className="headerimage3">
     <Segment style={{ paddingTop:'5em' }} vertical>
       <Grid celled='internally' columns='equal' stackable>
         <Grid.Row textAlign='center'>
@@ -418,7 +418,7 @@ const HomepageLayout = () => (
         </Grid.Row>
       </Grid>
     </Segment>
-  </div>
+  </div> */}
 
   <div className="headerimage4">
     <Segment vertical style={{ paddingTop:'8em' }} >

@@ -90,7 +90,7 @@ let { path, url } = useRouteMatch();
         setOpenConfirm(true);
         e.preventDefault();
 
-      }}} to={`checklistadd`} fluid  basic color='green' > <Icon name='plus' />Add</Button>
+      }}} to={`checklistadd`} fluid  basic color='green' > <Icon name='plus' />Tambah</Button>
       <Confirm
           open={openConfirm}
           content={`There are unsaved checklist name ${activeDraft?activeDraft.cklistName:""}. Do you wish to continue?`}
@@ -131,10 +131,10 @@ let { path, url } = useRouteMatch();
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>

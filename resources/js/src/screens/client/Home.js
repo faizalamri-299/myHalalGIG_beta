@@ -76,7 +76,8 @@ const Home = () => {
 }
 return (
 <>
-    <Segment style={{ padding: '0em 0em' }} vertical>
+    {/* <Segment style={{ padding: '0em 0em' }} vertical> */}
+    <Segment vertical>
       <Container text>
         <Grid>
           <Grid.Column textAlign="center">

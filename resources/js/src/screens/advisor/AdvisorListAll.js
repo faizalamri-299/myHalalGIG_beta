@@ -61,8 +61,8 @@ const AdvisorList = () => {
     <Dropdown icon="ellipsis vertical"  className='icon' 
     pointing='top left'>
     <Dropdown.Menu className='right'>
-      <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit user' />
-      <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Remove user' />
+      <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
+      <Dropdown.Item  onClick={()=>deleteUserForm(x.id)} icon='trash' text='Padam' />
     </Dropdown.Menu>
   </Dropdown>
     </Table.Cell>
@@ -160,7 +160,7 @@ const AdvisorList = () => {
        
         <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Add</Button>
       <Divider/>
-      <div style={{height:'70vh', overflowY:'auto'}}>
+      <div style={{height:'68vh', overflowY:'auto'}}>
       {(userFilter && userFilter.length)&&<RenderAdvisor data={userFilter}/>}
      
   </div>

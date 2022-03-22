@@ -65,9 +65,9 @@ const CertBodiesList = () => {
   <Dropdown icon="ellipsis vertical"  className='icon' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Edit details' />
+    <Dropdown.Item  onClick={()=>editForm(x)} color='blue' icon='edit outline' text='Kemaskini' />
 
-    <Dropdown.Item  onClick={()=>deleteCB(x.id)} icon='trash' text='Remove user' />
+    <Dropdown.Item  onClick={()=>deleteCB(x.id)} icon='trash' text='Padam' />
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
@@ -161,10 +161,10 @@ const CertBodiesList = () => {
         </Header>
 
         <Header as='h3' floated='left'>Certification Bodies</Header>   
-          <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Add</Button>
+          <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Tambah</Button>
           <Divider/>
       
-      <div style={{height:'70vh', overflowY:'auto'}}>
+      <div style={{height:'68vh', overflowY:'auto'}}>
       {(userFilter && userFilter.length)&&<RenderProfile data={userFilter}/>}
 
       {/*///////////////////////////////////////////////// modal add/////////////////////////////////////////////////////////////////// */}
@@ -188,10 +188,10 @@ const CertBodiesList = () => {
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal> 

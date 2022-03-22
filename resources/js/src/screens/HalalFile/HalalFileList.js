@@ -220,78 +220,59 @@ const panes = [
 
 ]
 
+const panesmicro = [
+  {
+    menuItem: { key: 'polisi', content: '1. Polisi Halal' },
+    render: () => <Tab.Pane>
+                    <TabPolicy/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'HalalRiskControl', content: '2. Kawalan Risiko Halal' },
+    render: () => <Tab.Pane>
+                    <TabHalalRiskControl/>
+                  </Tab.Pane>,
+  },
+  {
+    //menuItem: { key: 'SOPRawMat', content: '5.Kawalan Bahan Mentah' },<Icon name='checkmark'/>
+    menuItem: (
+      <Menu.Item key='SOPRawMat'>
+        3. Kawalan Bahan Mentah 
+      </Menu.Item>
+    ),
+    render: () => <Tab.Pane>
+                    <TabRawMaterial/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'Plan', content: '4. Latihan Halal' },
+    render: () => <Tab.Pane>
+                    <ClientContext.Provider value={clientContext}>
+                    <ClientTraining data={training}  onDataChange={updateTraining}  id={cmpny.cmpnyPK} accesslvl={profile.accesslvl} />
+                    </ClientContext.Provider>
+                    <br></br>
+                    <TabHalalTraining/>
+                  </Tab.Pane>,
+  },
+  {
+    menuItem: { key: 'Tracebility', content: '5. Kebolehkesanan' ,},
+    render: () => <Tab.Pane>
+                    <TabTraceability/>
+                  </Tab.Pane>,
+  },
+]
+
   return (
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-    <div className="container-fluid">
+    {/* <div className="container-fluid"> */}
+    <div>
       <>
-        {/* <StepProgressBar
-            startingStep={3}
-            steps={[
-                {
-                label: 'Fail 1',
-                subtitle: '10%',
-                name: 'Fail 1',
-                content: step1Content,
-                validator: step2Validator,
-                },
-                {
-                label: 'Fail 2',
-                subtitle: '20%',
-                name: 'Fail 2',
-                content: step2Content,
-                },
-                {
-                label: 'Fail 3',
-                subtitle: '30%',
-                name: 'Fail 3',
-                content: step3Content,
-                },
-                {
-                label: 'Fail 4',
-                subtitle: '40%',
-                name: 'Fail 4',
-                content: step4Content,
-                },
-                {
-                label: 'Fail 5',
-                subtitle: '50%',
-                name: 'Fail 5',
-                content: step5Content,
-                },
-                {
-                label: 'Fail 6',
-                subtitle: '60%',
-                name: 'Fail 6',
-                content: step6Content,
-                },
-                {
-                label: 'Fail 7',
-                subtitle: '70%',
-                name: 'Fail 7',
-                content: step7Content,
-                },
-                {
-                label: 'Fail 8',
-                subtitle: '80%',
-                name: 'Fail 8',
-                content: step8Content,
-                },
-                {
-                label: 'Fail 9',
-                subtitle: '90%',
-                name: 'Fail 9',
-                content: step9Content,
-                },
-                {
-                label: 'Fail 10',
-                subtitle: '100%',
-                name: 'Fail 10',
-                content: step9Content,
-                },
-            ]}
-        /> */}
-              
+      {/* <Header as='h3' dividing>{cmpny.cmpnyDetails.hasiljualan}</Header> */}
+      {cmpny.cmpnyDetails.hasiljualan === 'Nilai jualan tahunan <RM300,000' || cmpny.cmpnyDetails.hasiljualan === 'Nilai jualan tahunan RM300,000 - RM15 Juta' ?  
+      <Tab panes={panesmicro} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/> 
+      :
       <Tab panes={panes} onTabChange={(e,d)=>{console.log(d)}} menu={{ pointing: true, vertical: true, fluid: true }}/> 
+      }
       </>
       
       

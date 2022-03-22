@@ -82,7 +82,8 @@ const TabOrgChart = ({data}) => {
   return (
 
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-      <div className="in innerContainer">
+      {/* <div className="in innerContainer"> */}
+      <div>
 
   <Button color="teal" fluid onClick={()=>printDocument()}>Muat Turun</Button>
 

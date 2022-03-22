@@ -637,7 +637,7 @@ const traceabilitygeneral=()=>{
   return (
 
   <Transition transitionOnMount={true} animation="fade" duration={1000}>
-    <div className="in innerContainer" style={{height:'70vh', overflowY:'auto'}}>   
+    <div className="in innerContainer" style={{height:'68vh', overflowY:'auto'}}>   
     <Header as='h3'>Kebolehkesanan</Header>
       <Table celled>
         <Table.Header>

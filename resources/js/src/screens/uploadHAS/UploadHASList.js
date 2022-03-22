@@ -207,7 +207,7 @@ const micropanes = [
 ]
   return (
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-    <div className="container-fluid">
+    <div>
       <>
       {cmpny.cmpnyDetails.hasiljualan === 'Nilai jualan tahunan <RM300,000' || cmpny.cmpnyDetails.hasiljualan === 'Nilai jualan tahunan RM300,000 - RM15 Juta' ? 
     <Grid>

@@ -197,7 +197,7 @@ const RenderSupplier = props => {
  <Table.Row>
    <Table.HeaderCell>Nama Pembekal</Table.HeaderCell>
    <Table.HeaderCell>Bahan Mentah</Table.HeaderCell>
-    <Table.HeaderCell>Support Document</Table.HeaderCell>
+    <Table.HeaderCell>Dokumen Sokongan</Table.HeaderCell>
  </Table.Row>
 </Table.Header>
 

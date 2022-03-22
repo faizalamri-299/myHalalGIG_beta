@@ -142,7 +142,7 @@ const TabMaterial = ({data,id}) => {
      );
            
        return <React.Fragment>
-           <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Add</Button>
+           <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Tambah</Button>
            <Divider/>
            <div className="subcrTabPane">
            {tableItem == 0 ? 
@@ -191,10 +191,10 @@ const TabMaterial = ({data,id}) => {
         </Modal.Content>
         <Modal.Actions>
           <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-            <Icon name='remove' /> No
+            <Icon name='remove' /> Batal
           </Button>
           <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-            <Icon name='checkmark' /> Submit
+            <Icon name='checkmark' /> Simpan
           </Button>
         </Modal.Actions>
       </Modal> 
@@ -226,10 +226,10 @@ const TabMaterial = ({data,id}) => {
         </Modal.Content>
         <Modal.Actions>
           <Button color='red' onClick={() => {setModalUpdateOpen(false); resetForm();}}>
-            <Icon name='remove' /> No
+            <Icon name='remove' /> Batal
           </Button>
           <Button color='green' onClick={() => {setModalUpdateOpen(false); UpdateForm();location.reload();}}>
-            <Icon name='checkmark' /> Submit
+            <Icon name='checkmark' /> Simpan
           </Button>
         </Modal.Actions>
       </Modal> 

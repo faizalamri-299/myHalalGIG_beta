@@ -160,9 +160,8 @@ const tableItem = data.map((x, i) =>
     <Header as='h6' fluid floated='right'>
         <Input icon={{ name: 'search', link: true }} onChange={e=>{
           let filter=e.target.value.toLowerCase()
-          const filterData = productlist.filter(({ name, username,cmpnyName,rolename }) =>
-          name.toLowerCase().indexOf(filter) > -1 || username.toLowerCase().indexOf(filter) > -1
-          || cmpnyName.toLowerCase().indexOf(filter) > -1|| rolename.toLowerCase().indexOf(filter) > -1);
+          const filterData = productlist.filter(({ prsp_name }) =>
+          prsp_name.toLowerCase().indexOf(filter) > -1);
           setuserFilter(filterData)
         }}
         placeholder='Cari Produk...'
@@ -171,9 +170,9 @@ const tableItem = data.map((x, i) =>
 
     <Header as='h3' floated='left'>Senarai Produk</Header>
     
-    <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Add</Button>
+    <Button onClick={()=>setModalOpen(true)} fluid  basic color='green' > <Icon name='plus' />Tambah Produk</Button>
     <Divider/>
-      <div style={{height:'70vh', overflowY:'auto'}}>
+      <div style={{height:'68vh', overflowY:'auto'}}>
         {/* {(userFilter && userFilter.length)&&<RenderProduct data={userFilter}/>} */}
         {userFilter < 1 ? 
         <Message info>    
@@ -199,10 +198,10 @@ const tableItem = data.map((x, i) =>
           </Modal.Content>
         <Modal.Actions>
           <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-            <Icon name='remove' /> No
+            <Icon name='remove' /> Batal
           </Button>
           <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-            <Icon name='checkmark' /> Submit
+            <Icon name='checkmark' /> Simpan
           </Button>
         </Modal.Actions>
       </Modal>

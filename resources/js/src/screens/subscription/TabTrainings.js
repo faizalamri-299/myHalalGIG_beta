@@ -165,8 +165,8 @@ const tableItem = Object.keys(data).map((pg,i) =>
   <Dropdown icon="ellipsis vertical"  className='avatar image' 
   pointing='top left'>
   <Dropdown.Menu className='right'>
-    <Dropdown.Item  onClick={()=>editForm(pg)} color='blue' icon='edit outline' text='Edit user' />
-    <Dropdown.Item  onClick={()=>deleteForm(pg)} icon='trash' text='Remove user' />
+    <Dropdown.Item  onClick={()=>editForm(pg)} color='blue' icon='edit outline' text='Kemaskini' />
+    <Dropdown.Item  onClick={()=>deleteForm(pg)} icon='trash' text='Padam' />
   </Dropdown.Menu>
 </Dropdown>
   </Table.Cell>
@@ -274,10 +274,10 @@ const tableItem = Object.keys(data).map((pg,i) =>
             </Modal.Content>
             <Modal.Actions>
               <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button color='green' onClick={() => {setModalOpen(false); submitForm();}}>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>

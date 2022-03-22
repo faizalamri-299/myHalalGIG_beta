@@ -194,10 +194,10 @@ const ClientAdvisorList = () => { //client punya advisor yang dah lulus
 
           <Modal.Actions>
             <Button color='red' onClick={() => {setModalOpen(false); resetForm();}}>
-              <Icon name='remove' /> No
+              <Icon name='remove' /> Batal
             </Button>
             <Button color='green' onClick={() => {setModalOpen(false); submitForm()}}>
-              <Icon name='checkmark' /> Submit
+              <Icon name='checkmark' /> Simpan
             </Button>
           </Modal.Actions>
         </Modal>

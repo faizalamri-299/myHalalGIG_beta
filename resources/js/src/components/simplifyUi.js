@@ -220,10 +220,10 @@ return  <React.Fragment>
             </Modal.Content>
             <Modal.Actions>
               <Button type="reset" form="promptForm" color='red' >
-                <Icon name='remove' /> No
+                <Icon name='remove' /> Batal
               </Button>
               <Button type="submit" form="promptForm" color='green'>
-                <Icon name='checkmark' /> Submit
+                <Icon name='checkmark' /> Simpan
               </Button>
             </Modal.Actions>
           </Modal>

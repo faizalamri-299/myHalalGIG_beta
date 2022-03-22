@@ -211,8 +211,8 @@ if (cmpny)
   return (
    
     <Transition transitionOnMount={true} animation="fade" duration={1000}>
-      <div className="in innerContainer" style={{height:'70vh', overflowY:'auto'}}>
-
+      {/* <div className="in innerContainer" style={{height:'68vh', overflowY:'auto'}}> */}
+      <div>
       <Header as='h3'>Carta Organisasi</Header>
         <Table celled>
     <Table.Header>
@@ -237,12 +237,12 @@ if (cmpny)
     </Table.Body>
   </Table>
 
-        <Header as='h3'>Jawatankuasa Halal Dalaman</Header>
+        <Header as='h3'>Peranan Jawatankuasa Halal Dalaman</Header>
         <Table celled>
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell>No</Table.HeaderCell>
-        <Table.HeaderCell>Senarai Peranan Jawatankuasa Halal Dalaman</Table.HeaderCell>
+        <Table.HeaderCell>Senarai Terma Rujukan</Table.HeaderCell>
         <Table.HeaderCell>Nombor Rujukan Dokumen</Table.HeaderCell>
         <Table.HeaderCell>Templat</Table.HeaderCell>
       </Table.Row>
