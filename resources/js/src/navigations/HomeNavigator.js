@@ -80,7 +80,7 @@ const HomeNavigator = () => {
         <Menu.Item>
           <Dropdown item text={profile.name}>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={signOut}>Logout</Dropdown.Item>
+              <Dropdown.Item onClick={signOut}>Log Keluar</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>

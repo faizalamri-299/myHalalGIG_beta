@@ -193,7 +193,7 @@ const ClientUser = ({data,onDataChange,id,accesslvl}) => {
                   || rolename.toLowerCase().indexOf(filter) > -1);
                   setuserFilter(filterData)
                 }}
-                placeholder='Search users...'
+                placeholder='Cari pengguna...'
               />
       </Label>
     </Button>

@@ -118,7 +118,7 @@ const updateUser=(x,type)=>{
              <Dropdown item text={profile.name}>
             <Dropdown.Menu>
               {profile.accesslvl<2&&<Dropdown.Item onClick={()=>changeAccess(profile.accesslvl)}>Change Access</Dropdown.Item>}
-              <Dropdown.Item onClick={signOut}>Logout</Dropdown.Item>
+              <Dropdown.Item onClick={signOut}>Log Keluar</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>}
           </Menu.Item>

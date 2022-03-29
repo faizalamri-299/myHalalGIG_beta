@@ -94,7 +94,7 @@ class SupplierController extends Controller
             $contents = Storage::get($id.'\data\advsrprofile');
             $returnObj->advisorprofile=$this->unencodeMaster($contents);
         }
-        $suppliercert= SupplierCert::select('id','spcb_fk_supplier_id','spcb_cert_bodies', 'spcb_date_cert')->where('spcb_fk_supplier_id',$id)->orderBy('spcb_cert_bodies','asc')->get();
+        $suppliercert= SupplierCert::select('id','spcb_fk_supplier_id','spcb_cert_bodies', 'spcb_date_cert')->where('spcb_fk_supplier_id',$id)->orderBy('spcb_date_cert','asc')->get();
         $returnObj = (object)['isSuccess' =>false,'rawmaterial'=>$rawmaterial,'suppliercert'=>$suppliercert];
 
         return response()->json($returnObj);

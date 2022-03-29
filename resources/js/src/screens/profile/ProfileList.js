@@ -176,7 +176,7 @@ const ProfileList = () => {
                   || cmpnyName.toLowerCase().indexOf(filter) > -1|| rolename.toLowerCase().indexOf(filter) > -1);
                   setuserFilter(filterData)
                 }}
-                placeholder='Search users...'
+                placeholder='Cari pengguna...'
               />
     </Header>
     <Header as='h3' floated='left'>Senarai Pengguna</Header>
